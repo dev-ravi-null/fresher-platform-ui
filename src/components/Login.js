@@ -1,10 +1,13 @@
 
 import React from 'react';
 import { Button, TextField, Container, Typography } from '@mui/material';
+import Header from './Header';
 
 const Login = () => {
   return (
-    <Container maxWidth="sm">
+    <>
+    <Header/>
+     <Container maxWidth="sm">
       <Typography variant="h4" gutterBottom>
         Login
       </Typography>
@@ -14,6 +17,8 @@ const Login = () => {
         Login
       </Button>
     </Container>
+    </>
+   
   );
 };
 
