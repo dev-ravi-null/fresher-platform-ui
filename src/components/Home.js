@@ -44,7 +44,7 @@ const Home = () => {
                     marginBottom: 2,
                   }}
                 >
-                  Find Your Dream Job
+                  Find Your Dream job
                 </Typography>
                 <Typography variant="body1" sx={{ marginBottom: 3 }}>
                   Kickstart your career with jobs designed for freshers.
