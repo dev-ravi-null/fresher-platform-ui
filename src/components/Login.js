@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Header from './Header';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-
+import { loginUser } from '../api/api'
 const SpinningCube = () => (
   <mesh rotation={[10, 10, 0]}>
     <boxGeometry args={[1, 1, 1]} />
@@ -25,7 +25,7 @@ const Login = () => {
   });
 
   const handleSubmit = (values) => {
-    console.log('Form Data', values);
+    loginUser(values);
   };
 
   return (
