@@ -84,8 +84,8 @@ const Login = () => {
             Login successful!
           </Alert>
         )}
-        {loading && <LinearProgress sx={{ mb: 2, backgroundColor: '#00bfff','& .MuiLinearProgress-bar':{
-        backgroundColor: '#ccf2ff', // Change the progress bar color
+        {loading && <LinearProgress sx={{ mb: 2, backgroundColor: '#0080ff','& .MuiLinearProgress-bar':{
+        backgroundColor: '#66b3ff', // Change the progress bar color
       }, }} />} {/* Loader bar */}
         <Formik
           initialValues={initialValues}
