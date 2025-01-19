@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Container, Typography, Box, Alert } from '@mui/material';
+import { Button, TextField, Container, Typography, Box, Alert, LinearProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
@@ -14,7 +14,8 @@ const SpinningCube = () => (
 );
 
 const Login = () => {
-  const [loginStatus, setLoginStatus] = useState(''); // Manage login status messages
+  const [loginStatus, setLoginStatus] = useState('');
+  const [loading, setLoading] = useState(false); // Manage loading state
 
   const initialValues = {
     email: '',
@@ -27,17 +28,24 @@ const Login = () => {
   });
 
   const handleSubmit = (values) => {
-    // Mock login logic
-    const validUser = {
-      email: 'user@example.com',
-      password: 'password123',
-    };
+    setLoading(true); // Start loading
+    setLoginStatus(''); // Reset previous login status
 
-    if (values.email === validUser.email && values.password === validUser.password) {
-      setLoginStatus('success'); // Successful login
-    } else {
-      setLoginStatus('error'); // Invalid credentials
-    }
+    // Simulate a network request
+    setTimeout(() => {
+      const validUser = {
+        email: 'user@example.com',
+        password: 'password123',
+      };
+
+      if (values.email === validUser.email && values.password === validUser.password) {
+        setLoginStatus('success'); // Successful login
+      } else {
+        setLoginStatus('error'); // Invalid credentials
+      }
+
+      setLoading(false); // Stop loading
+    }, 2000); // Simulate a 2-second delay
   };
 
   return (
@@ -76,6 +84,9 @@ const Login = () => {
             Login successful!
           </Alert>
         )}
+        {loading && <LinearProgress sx={{ mb: 2, backgroundColor: '#00bfff','& .MuiLinearProgress-bar':{
+        backgroundColor: '#ccf2ff', // Change the progress bar color
+      }, }} />} {/* Loader bar */}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -110,8 +121,9 @@ const Login = () => {
                 color="primary"
                 fullWidth
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
+                disabled={loading} // Disable button while loading
               >
-                Login
+                {loading ? 'Logging in...' : 'Login'}
               </Button>
             </Form>
           )}
