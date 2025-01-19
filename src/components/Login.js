@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import Header from './Header';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { loginUser } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const SpinningCube = () => (
   <mesh rotation={[10, 10, 0]}>
@@ -14,7 +16,7 @@ const SpinningCube = () => (
 );
 
 const Login = () => {
-  const [loading, setLoading] = useState(false); // Manage loading state
+  const [loading, setLoading] = useState(false); // Manage loading stat
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
@@ -36,7 +38,19 @@ const Login = () => {
       console.log('Form Data', values);
       setLoading(false); // Stop loader
     }, 2000); // Simulated 2-second delay
+
+  const handleSubmit = async (values) => {
+    setIsLoading(true); // Start loading
+    try {
+      await loginUser(values, navigate); // Call the login API
+    } catch (error) {
+      console.error('Login failed:', error); // Log the error for debugging
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+
   };
+
 
   return (
     <>
@@ -69,6 +83,7 @@ const Login = () => {
             backgroundColor: '#1a8cff', // Change the progress bar color
           },
         }} />} {/* Loader bar */}
+        {isLoading && <LinearProgress color="secondary" />} {/* Show LinearProgress when loading */}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -106,6 +121,9 @@ const Login = () => {
                 disabled={loading} // Disable button while loading
               >
                 {loading ? 'Logging in...' : 'Login'}
+                disabled={isLoading} // Disable button when loading
+              >
+                {isLoading ? 'Loading...' : 'Login'} {/* Change text when loading */}
               </Button>
             </Form>
           )}

@@ -88,7 +88,7 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'black' }}>
                     <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                   </Link>
                 </MenuItem>
@@ -116,33 +116,16 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'white',
-                  display: 'block',
-                  textAlign: 'center', // Center text
-                }}
-              >
-                <Link
-                  to={`/${page.toLowerCase()}`}
-                  style={{
-                    textDecoration: 'none',
-                    color: 'white',
-                    width: '80%', // Make the link fill the entire button width
-                    height: '80%', // Make the link fill the button's height
-                    display: 'block', // Make link fill the full space of the button
-                    padding: '8px 16px', // Adjust padding if necessary
-                  }}
+              <Link key={page} to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block', width: '100%' }}
                 >
                   {page}
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
