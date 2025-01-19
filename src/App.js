@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import { Home } from './components/Home';
 import FresherDetails from './components/FresherDetails';
 import Dashboard from './components/Dashbaord';  // Uncomment when Dashboard is ready
+import PostLogin from './components/PostLogin';
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/fresherdetails" element={<FresherDetails />} />
         <Route path="/admin" element={<Dashboard />} />
+        <Route path="/dashbaord" element={<PostLogin />} />
+
       </Routes>
       <ToastContainer
         position="top-center"  // Position in the middle of the top

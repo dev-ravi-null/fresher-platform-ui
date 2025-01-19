@@ -1,43 +1,49 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';  // Import toast from react-toastify
-import 'react-toastify/dist/ReactToastify.css';  // Import the CSS for the toast notifications
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const api = axios.create({
   baseURL: 'https://fresher-backend.onrender.com/api',
 });
 
-// Create a function to handle toast notifications based on the response
-const handleResponse = (response) => {
-  // Check if the response is successful
+// Handle successful responses
+const handleResponse = (response, navigate) => {
   if (response.status === 200) {
-    toast.success('Request was successful!');
+    toast.success('Login successful!');
+    navigate('/dashboard'); // Navigate to the dashboard on success
   } else {
-    toast.error('Something went wrong!');
+    toast.error('Unexpected response!');
   }
 };
 
-const handleError = (error) => {
+// Handle API errors
+const handleError = (error, navigate) => {
   if (error.response) {
-    // If the server responded with a status outside of the 2xx range
-    toast.error(error.response.data.message || 'An error occurred');
+    // Handle specific error messages from the server
+    toast.error(error.response.data.message || 'Login failed!');
   } else {
-    // If there is no response (like network error)
+    // Handle network or unknown errors
     toast.error('Network error, please try again!');
   }
 };
 
-export const loginUser = (credentials) => {
+// Login User
+export const loginUser = (credentials, navigate) => {
   return api
     .post('/auth/fresher/login', credentials)
-    .then(handleResponse)  // Handle success
-    .catch(handleError);   // Handle errors
+    .then((response) => handleResponse(response, navigate))
+    .catch((error) => handleError(error, navigate)); // Handle errors and navigate
 };
 
-export const signupUser = (data) => {
+
+export const signupUser = (data, navigate) => {
   return api
     .post('/signup', data)
-    .then(handleResponse)  // Handle success
-    .catch(handleError);   // Handle errors
+    .then((response) => {
+      toast.success('Signup was successful!');
+      navigate('/login'); // Redirect to login after signup (if needed)
+    })
+    .catch((error) => handleError(error, navigate)); // Pass `navigate` explicitly
 };
 
 export default api;

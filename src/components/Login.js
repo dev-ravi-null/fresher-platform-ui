@@ -6,6 +6,7 @@ import Header from './Header';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { loginUser } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const SpinningCube = () => (
   <mesh rotation={[10, 10, 0]}>
@@ -16,6 +17,7 @@ const SpinningCube = () => (
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const navigate = useNavigate();
 
   const initialValues = {
     email: '',
@@ -30,13 +32,14 @@ const Login = () => {
   const handleSubmit = async (values) => {
     setIsLoading(true); // Start loading
     try {
-      await loginUser(values); // Call the login API
+      await loginUser(values, navigate); // Call the login API
     } catch (error) {
-      console.error(error);
+      console.error('Login failed:', error); // Log the error for debugging
     } finally {
       setIsLoading(false); // Stop loading
     }
   };
+
 
   return (
     <>
