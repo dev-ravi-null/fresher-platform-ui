@@ -16,6 +16,7 @@ const SpinningCube = () => (
 );
 
 const Login = () => {
+  const [loading, setLoading] = useState(false); // Manage loading stat
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
@@ -29,6 +30,15 @@ const Login = () => {
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
 
+  const handleSubmit = (values) => {
+    setLoading(true); // Start loader
+
+    // Simulate a network request
+    setTimeout(() => {
+      console.log('Form Data', values);
+      setLoading(false); // Stop loader
+    }, 2000); // Simulated 2-second delay
+
   const handleSubmit = async (values) => {
     setIsLoading(true); // Start loading
     try {
@@ -38,6 +48,7 @@ const Login = () => {
     } finally {
       setIsLoading(false); // Stop loading
     }
+
   };
 
 
@@ -67,6 +78,11 @@ const Login = () => {
         <Typography variant="h4" gutterBottom textAlign="center" color="primary" fontWeight="bold">
           Login
         </Typography>
+        {loading && <LinearProgress sx={{
+          mb: 2, backgroundColor: '#66b3ff', /* Change the track color*/ '& .MuiLinearProgress-bar': {
+            backgroundColor: '#1a8cff', // Change the progress bar color
+          },
+        }} />} {/* Loader bar */}
         {isLoading && <LinearProgress color="secondary" />} {/* Show LinearProgress when loading */}
         <Formik
           initialValues={initialValues}
@@ -102,6 +118,9 @@ const Login = () => {
                 color="primary"
                 fullWidth
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
+                disabled={loading} // Disable button while loading
+              >
+                {loading ? 'Logging in...' : 'Login'}
                 disabled={isLoading} // Disable button when loading
               >
                 {isLoading ? 'Loading...' : 'Login'} {/* Change text when loading */}
