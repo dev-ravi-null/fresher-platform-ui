@@ -15,6 +15,8 @@ const SpinningCube = () => (
 
 const Login = () => {
   const [loading, setLoading] = useState(false); // Manage loading state
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const navigate = useNavigate();
 
   const initialValues = {
     email: '',
