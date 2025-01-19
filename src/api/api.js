@@ -10,7 +10,7 @@ const api = axios.create({
 const handleResponse = (response, navigate) => {
   if (response.status === 200) {
     toast.success('Login successful!');
-    navigate('/dashboard'); // Navigate to the dashboard on success
+    navigate('/dashbaord'); // Navigate to the dashboard on success
   } else {
     toast.error('Unexpected response!');
   }
