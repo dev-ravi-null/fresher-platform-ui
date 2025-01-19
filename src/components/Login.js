@@ -1,19 +1,22 @@
-import React from 'react';
-import { Button, TextField, Container, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, TextField, Container, Typography, Box, LinearProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { loginUser } from '../api/api'
+import { loginUser } from '../api/api';
+
 const SpinningCube = () => (
   <mesh rotation={[10, 10, 0]}>
     <boxGeometry args={[1, 1, 1]} />
     <meshStandardMaterial color="orange" />
   </mesh>
 );
-// login section
+
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+
   const initialValues = {
     email: '',
     password: '',
@@ -24,8 +27,15 @@ const Login = () => {
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
 
-  const handleSubmit = (values) => {
-    loginUser(values);
+  const handleSubmit = async (values) => {
+    setIsLoading(true); // Start loading
+    try {
+      await loginUser(values); // Call the login API
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
   };
 
   return (
@@ -40,7 +50,7 @@ const Login = () => {
           borderRadius: 2,
           backgroundColor: '#ffffff',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
       >
         <Box sx={{ position: 'absolute', top: -50, left: -50, opacity: 0.2 }}>
@@ -54,6 +64,7 @@ const Login = () => {
         <Typography variant="h4" gutterBottom textAlign="center" color="primary" fontWeight="bold">
           Login
         </Typography>
+        {isLoading && <LinearProgress color="secondary" />} {/* Show LinearProgress when loading */}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -88,8 +99,9 @@ const Login = () => {
                 color="primary"
                 fullWidth
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
+                disabled={isLoading} // Disable button when loading
               >
-                Login
+                {isLoading ? 'Loading...' : 'Login'} {/* Change text when loading */}
               </Button>
             </Form>
           )}
