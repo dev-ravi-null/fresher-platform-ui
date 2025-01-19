@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, TextField, Container, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, TextField, Container, Typography, Box, Alert } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
@@ -12,8 +12,10 @@ const SpinningCube = () => (
     <meshStandardMaterial color="orange" />
   </mesh>
 );
-// login section
+
 const Login = () => {
+  const [loginStatus, setLoginStatus] = useState(''); // Manage login status messages
+
   const initialValues = {
     email: '',
     password: '',
@@ -25,7 +27,17 @@ const Login = () => {
   });
 
   const handleSubmit = (values) => {
-    console.log('Form Data', values);
+    // Mock login logic
+    const validUser = {
+      email: 'user@example.com',
+      password: 'password123',
+    };
+
+    if (values.email === validUser.email && values.password === validUser.password) {
+      setLoginStatus('success'); // Successful login
+    } else {
+      setLoginStatus('error'); // Invalid credentials
+    }
   };
 
   return (
@@ -40,7 +52,7 @@ const Login = () => {
           borderRadius: 2,
           backgroundColor: '#ffffff',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
       >
         <Box sx={{ position: 'absolute', top: -50, left: -50, opacity: 0.2 }}>
@@ -54,6 +66,16 @@ const Login = () => {
         <Typography variant="h4" gutterBottom textAlign="center" color="primary" fontWeight="bold">
           Login
         </Typography>
+        {loginStatus === 'error' && (
+          <Alert severity="error" sx={{ mb: 3 }}>
+            Invalid email or password. Please try again.
+          </Alert>
+        )}
+        {loginStatus === 'success' && (
+          <Alert severity="success" sx={{ mb: 3 }}>
+            Login successful!
+          </Alert>
+        )}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
