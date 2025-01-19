@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Container, Typography, Box, Alert, LinearProgress } from '@mui/material';
+import { Button, TextField, Container, Typography, Box, LinearProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
@@ -14,7 +14,6 @@ const SpinningCube = () => (
 );
 
 const Login = () => {
-  const [loginStatus, setLoginStatus] = useState('');
   const [loading, setLoading] = useState(false); // Manage loading state
 
   const initialValues = {
@@ -28,24 +27,13 @@ const Login = () => {
   });
 
   const handleSubmit = (values) => {
-    setLoading(true); // Start loading
-    setLoginStatus(''); // Reset previous login status
+    setLoading(true); // Start loader
 
     // Simulate a network request
     setTimeout(() => {
-      const validUser = {
-        email: 'user@example.com',
-        password: 'password123',
-      };
-
-      if (values.email === validUser.email && values.password === validUser.password) {
-        setLoginStatus('success'); // Successful login
-      } else {
-        setLoginStatus('error'); // Invalid credentials
-      }
-
-      setLoading(false); // Stop loading
-    }, 2000); // Simulate a 2-second delay
+      console.log('Form Data', values);
+      setLoading(false); // Stop loader
+    }, 2000); // Simulated 2-second delay
   };
 
   return (
@@ -74,19 +62,11 @@ const Login = () => {
         <Typography variant="h4" gutterBottom textAlign="center" color="primary" fontWeight="bold">
           Login
         </Typography>
-        {loginStatus === 'error' && (
-          <Alert severity="error" sx={{ mb: 3 }}>
-            Invalid email or password. Please try again.
-          </Alert>
-        )}
-        {loginStatus === 'success' && (
-          <Alert severity="success" sx={{ mb: 3 }}>
-            Login successful!
-          </Alert>
-        )}
-        {loading && <LinearProgress sx={{ mb: 2, backgroundColor: '#0080ff','& .MuiLinearProgress-bar':{
-        backgroundColor: '#66b3ff', // Change the progress bar color
-      }, }} />} {/* Loader bar */}
+        {loading && <LinearProgress sx={{
+          mb: 2, backgroundColor: '#66b3ff', /* Change the track color*/ '& .MuiLinearProgress-bar': {
+            backgroundColor: '#1a8cff', // Change the progress bar color
+          },
+        }} />} {/* Loader bar */}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
