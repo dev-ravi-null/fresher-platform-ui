@@ -38,12 +38,9 @@ export const loginUser = (credentials, navigate) => {
 
 export const signupUser = (data, navigate) => {
   return api
-    .post('/signup', data)
-    .then((response) => {
-      toast.success('Signup was successful!');
-      navigate('/login'); // Redirect to login after signup (if needed)
-    })
-    .catch((error) => handleError(error, navigate)); // Pass `navigate` explicitly
+    .post('/auth/fresher/signup', data)
+    .then((response) => handleResponse(response, navigate))
+    .catch((error) => handleError(error, navigate)); // Handle errors and navigate
 };
 
 export default api;
