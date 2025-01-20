@@ -50,7 +50,7 @@ const Signup = () => {
         maxWidth="sm"
         sx={{
           mt: 5,
-          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.2)',
           p: 4,
           borderRadius: 3,
           backgroundColor: '#f9f9f9',
