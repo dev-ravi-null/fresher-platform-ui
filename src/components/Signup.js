@@ -3,8 +3,11 @@ import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
+import { signupUser } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const navigate = useNavigate();
   const initialValues = {
     name: '',
     email: '',
@@ -30,8 +33,14 @@ const Signup = () => {
       .required('Graduation Year is required'),
   });
 
-  const handleSubmit = (values) => {
-    console.log('Form Data', values);
+
+  const handleSubmit = async (values) => {
+    // setIsLoading(true); // Start loading
+    try {
+      await signupUser(values, navigate); // Call the login API
+    } catch (error) {
+      console.error('Login failed:', error); // Log the error for debugging
+    }
   };
 
   return (
