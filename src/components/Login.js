@@ -5,8 +5,6 @@ import * as Yup from 'yup';
 import Header from './Header';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { useNavigate } from 'react-router-dom';
-
 
 const SpinningCube = () => (
   <mesh rotation={[10, 10, 0]}>
@@ -16,7 +14,6 @@ const SpinningCube = () => (
 );
 
 const Login = () => {
-  const [loading, setLoading] = useState(false); // Manage loading state
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
@@ -30,15 +27,17 @@ const Login = () => {
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
 
-  const handleSubmit = (values) => {
-    setLoading(true); // Start loader
-
-    // Simulate a network request
-    setTimeout(() => {
-      console.log('Form Data', values);
-      setLoading(false); // Stop loader
-    }, 2000); // Simulated 2-second delay
+  const handleSubmit = async (values) => {
+    setIsLoading(true); // Start loading
+    try {
+      await loginUser(values, navigate); // Call the login API
+    } catch (error) {
+      console.error('Login failed:', error); // Log the error for debugging
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
   };
+
 
   return (
     <>
@@ -67,7 +66,7 @@ const Login = () => {
           Login
         </Typography>
         {loading && <LinearProgress sx={{
-          mb: 2, backgroundColor: '#66b3ff', /* Change the track color*/ '& .MuiLJinearProgress-bar': {
+          mb: 2, backgroundColor: '#66b3ff', /* Change the track color*/ '& .MuiLinearProgress-bar': {
             backgroundColor: '#1a8cff', // Change the progress bar color
           },
         }} />} {/* Loader bar */}
@@ -105,9 +104,9 @@ const Login = () => {
                 color="primary"
                 fullWidth
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
-                disabled={loading} // Disable button while loading
+                disabled={isLoading} // Disable button when loading
               >
-                {loading ? 'Logging in...' : 'Login'}
+                {isLoading ? 'Loading...' : 'Login'} {/* Change text when loading */}
               </Button>
             </Form>
           )}
