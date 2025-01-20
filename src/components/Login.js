@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import Header from './Header';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { useNavigate } from 'react-router-dom';
+
 
 const SpinningCube = () => (
   <mesh rotation={[10, 10, 0]}>
@@ -65,7 +67,7 @@ const Login = () => {
           Login
         </Typography>
         {loading && <LinearProgress sx={{
-          mb: 2, backgroundColor: '#66b3ff', /* Change the track color*/ '& .MuiLinearProgress-bar': {
+          mb: 2, backgroundColor: '#66b3ff', /* Change the track color*/ '& .MuiLJinearProgress-bar': {
             backgroundColor: '#1a8cff', // Change the progress bar color
           },
         }} />} {/* Loader bar */}
