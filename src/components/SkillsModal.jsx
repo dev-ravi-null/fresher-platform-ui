@@ -49,7 +49,7 @@ const SkillsModal = () => {
       }}
     >
       <Typography variant="h5" component="h2" sx={{ mb: 3 }}>
-        Select Your Skills
+        Add Skills
       </Typography>
       <Autocomplete
         multiple
