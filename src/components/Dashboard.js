@@ -34,11 +34,11 @@ const Dashboard = ({ data }) => {
     };
 
     const drawerIcons = {
-        profilePhoto: <AccountCircleIcon />,
-        resume: <DescriptionIcon />,
-        commits: <CodeIcon />,
-        interview: <EventIcon />,
-        skills: <SkillsIcon />,
+        profilePhoto: <AccountCircleIcon sx={{ color: 'green' }} />,
+        resume: <DescriptionIcon sx={{ color: 'green' }} />,
+        commits: <CodeIcon sx={{ color: 'green' }} />,
+        interview: <EventIcon sx={{ color: 'green' }} />,
+        skills: <SkillsIcon sx={{ color: 'red' }} />,
     };
 
     const drawer = (
@@ -53,7 +53,7 @@ const Dashboard = ({ data }) => {
                         selected={selected === key}
                         sx={{ cursor: 'pointer' }}
                     >
-                        <ListItemIcon>{drawerIcons[key.toLowerCase()] || <AccountCircleIcon />}</ListItemIcon>
+                        <ListItemIcon>{drawerIcons[key.toLowerCase()] || <AccountCircleIcon sx={{ color: 'green' }} />}</ListItemIcon>
                         <ListItemText primary={key.replace(/([A-Z])/g, ' $1')} />
                     </ListItem>
                 ))}
