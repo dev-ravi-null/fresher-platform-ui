@@ -19,13 +19,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/fresherdetails" element={<FresherDetails />} />
-        <Route
-          path="/dashboard"
-          element={
-            <Dashboard
+        <Route path="/dashboard" element={ <Dashboard
               data={{
                 ProfilePhoto: <DocumentUpload />,
-                Resume: <DocumentUpload />,
+                Resume:  <DocumentUpload />,
                 Commits: <DashboardModal />,
                 Interview: <div>Interview Content</div>,
                 Skills: <SkillsModal />
