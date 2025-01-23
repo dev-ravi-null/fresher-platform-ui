@@ -8,9 +8,15 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DescriptionIcon from '@mui/icons-material/Description';
+import CodeIcon from '@mui/icons-material/Code';
+import EventIcon from '@mui/icons-material/Event';
+import SkillsIcon from '@mui/icons-material/Build';
 
 const drawerWidth = 240;
 
@@ -27,12 +33,27 @@ const Dashboard = ({ data }) => {
         if (mobileOpen) setMobileOpen(false); // Close drawer on selection in mobile
     };
 
+    const drawerIcons = {
+        profilePhoto: <AccountCircleIcon />,
+        resume: <DescriptionIcon />,
+        commits: <CodeIcon />,
+        interview: <EventIcon />,
+        skills: <SkillsIcon />,
+    };
+
     const drawer = (
         <div>
             <Toolbar />
             <List>
                 {Object.keys(data).map((key) => (
-                    <ListItem button key={key} onClick={() => handleSelect(key)}>
+                    <ListItem
+                        button
+                        key={key}
+                        onClick={() => handleSelect(key)}
+                        selected={selected === key}
+                        sx={{ cursor: 'pointer' }}
+                    >
+                        <ListItemIcon>{drawerIcons[key.toLowerCase()] || <AccountCircleIcon />}</ListItemIcon>
                         <ListItemText primary={key.replace(/([A-Z])/g, ' $1')} />
                     </ListItem>
                 ))}
