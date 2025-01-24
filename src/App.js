@@ -25,7 +25,8 @@ const App = () => {
             Resume: <DocumentUpload type="Resume" />,
             Commits: <DashboardModal />,
             Interview: <div>Interview Content</div>,
-            Skills: <SkillsModal />
+            Skills: <SkillsModal />,
+            logout:<div>anuj</div>
           }}
         />
         }
