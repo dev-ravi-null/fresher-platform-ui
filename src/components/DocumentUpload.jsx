@@ -1,38 +1,70 @@
-import React, { useState } from 'react';
-import { Box, Button, LinearProgress, Typography, Card, CardContent, List, ListItem, ListItemText, Alert } from '@mui/material';
-import { useDropzone } from 'react-dropzone';
-
-const DocumentUpload = () => {
-  const [selectedFiles, setSelectedFiles] = useState(undefined);
-  const [currentFile, setCurrentFile] = useState(undefined);
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  LinearProgress,
+  Typography,
+  Card,
+  CardContent,
+  List,
+  ListItem,
+  ListItemText,
+  Alert,
+} from "@mui/material";
+import { useDropzone } from "react-dropzone";
+import { uploadPhoto, uploadResume } from "../api/api";
+const DocumentUpload = ({ type }) => {
+  const [selectedFiles, setSelectedFiles] = useState(null);
+  const [currentFile, setCurrentFile] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [fileInfos, setFileInfos] = useState([]);
 
-  const upload = () => {
+  const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
-      setMessage('No file selected for upload!');
+      setMessage("No file selected for upload!");
       return;
     }
+        const formData = new FormData();
+        formData.append("photo", file); // Matches "photo"
+        formData.append("userId", userId);
+      
+        try {
+          const response = await fetch("https://fresher-backend.onrender.com/api/fresher-details/upload-photo", {
+            method: "POST",
+            body: formData,
+          });
+      
+          const result = await response.json();
+          if (response.ok) {
+            console.log("Photo uploaded successfully:", result);
+          } else {
+            console.error("Error uploading photo:", result.message);
+          }
+        } catch (error) {
+          console.error("Unexpected error:", error);
+      }
+      
+    // const formData = new FormData();
+    // const endpoint = type === "Resume" ? uploadResume : uploadPhoto; // Select correct API endpoint
+    // formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]);
+    // formData.append("userId", "678d2f0a7221da2838c1d48d");
 
-    const file = selectedFiles[0];
+    // setProgress(0);
+    // setCurrentFile(selectedFiles[0]);
 
-    setProgress(0);
-    setCurrentFile(file);
-
-    // Simulate upload progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setMessage('File uploaded successfully!');
-          setFileInfos((prevInfos) => [...prevInfos, { name: file.name, url: '#' }]);
-          setCurrentFile(undefined);
-          return prev;
-        }
-        return prev + 10;
-      });
-    }, 200);
+    // try {
+    //   await endpoint(formData);
+    //   setMessage("File uploaded successfully!");
+    //   setFileInfos((prevInfos) => [
+    //     ...prevInfos,
+    //     { name: selectedFiles[0].name, url: "#" }, // Use real URL if provided by backend
+    //   ]);
+    //   setCurrentFile(null);
+    // } catch (error) {
+    //   setMessage("Could not upload the file!");
+    //   console.error(error);
+    // }
   };
 
   const onDrop = (files) => {
@@ -44,12 +76,13 @@ const DocumentUpload = () => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
+    accept: type === "Resume" ? "application/pdf" : "image/*", // Accept only relevant file types
   });
 
   return (
     <Box sx={{ p: 4 }}>
       <Typography variant="h4" gutterBottom>
-        Photo Upload
+        {type} Upload
       </Typography>
 
       {currentFile && (
@@ -64,12 +97,12 @@ const DocumentUpload = () => {
       <Box
         {...getRootProps({
           style: {
-            border: '2px dashed #ccc',
-            borderRadius: '8px',
-            padding: '20px',
-            textAlign: 'center',
-            cursor: 'pointer',
-            marginBottom: '20px'
+            border: "2px dashed #ccc",
+            borderRadius: "8px",
+            padding: "20px",
+            textAlign: "center",
+            cursor: "pointer",
+            marginBottom: "20px",
           },
         })}
       >
@@ -96,7 +129,10 @@ const DocumentUpload = () => {
       </Button>
 
       {message && (
-        <Alert severity={message.includes('successfully') ? 'success' : 'error'} sx={{ mb: 3 }}>
+        <Alert
+          severity={message.includes("successfully") ? "success" : "error"}
+          sx={{ mb: 3 }}
+        >
           {message}
         </Alert>
       )}
@@ -105,7 +141,7 @@ const DocumentUpload = () => {
         <Card>
           <CardContent>
             <Typography variant="h6" gutterBottom>
-              List of Files
+              Uploaded Files
             </Typography>
             <List>
               {fileInfos.map((file, index) => (
@@ -113,8 +149,12 @@ const DocumentUpload = () => {
                   <ListItemText
                     primary={file.name}
                     secondary={
-                      <a href={file.url} target="_blank" rel="noopener noreferrer">
-                        {file.url}
+                      <a
+                        href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View File
                       </a>
                     }
                   />

@@ -43,4 +43,41 @@ export const signupUser = (data, navigate) => {
     .catch((error) => handleError(error, navigate)); // Handle errors and navigate
 };
 
+
+export const uploadPhoto = (data) => {
+  return api
+    .post('/fresher-details/upload-resume', data)
+    .then((response) => {
+      toast.success('Photo uploaded successfully!');
+      return response.data;
+    })
+    .catch((error) => {
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else if (error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error('An unexpected error occurred.');
+      }
+      throw error;
+    });
+};
+export const uploadResume = (data) => {
+  return api
+    .post('/fresher-details', data)
+    .then((response) => {
+      toast.success('Photo uploaded successfully!');
+      return response.data;
+    })
+    .catch((error) => {
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else if (error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error('An unexpected error occurred.');
+      }
+      throw error;
+    });
+};
 export default api;

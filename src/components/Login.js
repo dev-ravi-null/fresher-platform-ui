@@ -3,15 +3,7 @@ import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
 import { loginUser } from '../api/api'
-const SpinningCube = () => (
-  <mesh rotation={[10, 10, 0]}>
-    <boxGeometry args={[1, 1, 1]} />
-    <meshStandardMaterial color="orange" />
-  </mesh>
-);
 // login section
 const Login = () => {
   const initialValues = {
@@ -43,14 +35,6 @@ const Login = () => {
           overflow: 'hidden'
         }}
       >
-        <Box sx={{ position: 'absolute', top: -50, left: -50, opacity: 0.2 }}>
-          <Canvas style={{ height: '200px', width: '200px' }}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[0, 0, 5]} />
-            <SpinningCube />
-            <OrbitControls enableZoom={false} autoRotate />
-          </Canvas>
-        </Box>
         <Typography variant="h4" gutterBottom textAlign="center" color="primary" fontWeight="bold">
           Login
         </Typography>

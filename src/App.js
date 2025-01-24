@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import DocumentUpload from './components/DocumentUpload';
 import SkillsModal from './components/SkillsModal';
 import DashboardModal from './components/DashboardModal';
+
 const App = () => {
   return (
     <div>
@@ -20,8 +21,8 @@ const App = () => {
         <Route path="/fresherdetails" element={<FresherDetails />} />
         <Route path="/dashboard" element={<Dashboard
           data={{
-            ProfilePhoto: <DocumentUpload />,
-            Resume: <DocumentUpload />,
+            ProfilePhoto: <DocumentUpload type="Photo" />,
+            Resume: <DocumentUpload type="Resume" />,
             Commits: <DashboardModal />,
             Interview: <div>Interview Content</div>,
             Skills: <SkillsModal />
