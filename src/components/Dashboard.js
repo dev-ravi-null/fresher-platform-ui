@@ -21,14 +21,15 @@ import EventIcon from '@mui/icons-material/Event';
 import SkillsIcon from '@mui/icons-material/Build';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ConfirmDialog from './ConfirmDialog'; // Import the custom ConfirmDialog
-
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 const drawerWidth = 240;
 
 const Dashboard = ({ data }) => {
+    const initialSelectedKey = Object.keys(data)[0]; // Get the first key from data
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [selected, setSelected] = useState('profilePhoto');
-    const [openDialog, setOpenDialog] = useState(false); // State to handle the dialog
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [selected, setSelected] = useState(initialSelectedKey); // Default to the first key
+    const [openDialog, setOpenDialog] = useState(false);
+    const navigate = useNavigate();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -36,25 +37,26 @@ const Dashboard = ({ data }) => {
 
     const handleSelect = (option) => {
         if (option === 'Logout') {
-            setOpenDialog(true); // Show confirmation dialog when logging out
+            setOpenDialog(true);
             return;
         }
         setSelected(option);
-        if (mobileOpen) setMobileOpen(false); // Close drawer on selection in mobile  
+        if (mobileOpen) setMobileOpen(false);
     };
 
     const handleLogout = () => {
-        setOpenDialog(false); // Close the dialog
-        navigate('/'); // Redirect to the main page
+        setOpenDialog(false);
+        navigate('/');
     };
 
     const drawerIcons = {
+        chart: <AnalyticsIcon sx={{ color: 'green' }}/>,
         profilephoto: <AccountCircleIcon sx={{ color: 'green' }} />,
         resume: <DescriptionIcon sx={{ color: 'green' }} />,
         commits: <CodeIcon sx={{ color: 'green' }} />,
         interview: <EventIcon sx={{ color: 'green' }} />,
         skills: <SkillsIcon sx={{ color: 'red' }} />,
-        logout: <LogoutIcon sx={{ color: 'red' }} />
+        logout: <LogoutIcon sx={{ color: 'red' }} />,
     };
 
     const drawer = (
@@ -84,8 +86,8 @@ const Dashboard = ({ data }) => {
                 position="fixed"
                 sx={{
                     zIndex: (theme) => theme.zIndex.drawer + 1,
-                    backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", // Gradient
-                    color: "#fff", // Ensure text color is visible
+                    backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)",
+                    color: "#fff",
                 }}
             >
                 <Toolbar>
@@ -94,14 +96,14 @@ const Dashboard = ({ data }) => {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }} // Show on small screens
+                        sx={{ mr: 2, display: { sm: 'none' } }}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         Dashboard
                     </Typography>
-                    <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}> {/* Add 'gap' to space out the buttons */}
+                    <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
                         <Button variant="contained">Recruiter View</Button>
                         <Button variant="contained">Live</Button>
                     </Box>
@@ -111,13 +113,12 @@ const Dashboard = ({ data }) => {
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             >
-                {/* Mobile drawer */}
                 <Drawer
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
                     ModalProps={{
-                        keepMounted: true, // Better performance on mobile
+                        keepMounted: true,
                     }}
                     sx={{
                         display: { xs: 'block', sm: 'none' },
@@ -126,7 +127,6 @@ const Dashboard = ({ data }) => {
                 >
                     {drawer}
                 </Drawer>
-                {/* Permanent drawer */}
                 <Drawer
                     variant="permanent"
                     sx={{
@@ -147,15 +147,12 @@ const Dashboard = ({ data }) => {
                 }}
             >
                 <Toolbar />
-                {/* Render selected content */}
-                {data[selected]}
+                {data[selected]} {/* Render the selected content */}
             </Box>
-
-            {/* Confirmation Dialog */}
             <ConfirmDialog
                 show={openDialog}
-                proceed={handleLogout} // Handle confirmation (logout)
-                cancel={() => setOpenDialog(false)} // Handle cancellation
+                proceed={handleLogout}
+                cancel={() => setOpenDialog(false)}
                 title="Logout"
                 content="Are you sure you want to log out?"
                 cancelText="Cancel"
