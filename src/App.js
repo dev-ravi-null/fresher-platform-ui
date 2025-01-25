@@ -11,6 +11,7 @@ import DocumentUpload from './components/DocumentUpload';
 import SkillsModal from './components/SkillsModal';
 import DashboardModal from './components/DashboardModal';
 import  DashboardCharts  from './components/DashboardCharts';
+import RecruiterView from './components/RecruiterView';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/fresherdetails" element={<FresherDetails />} />
+        <Route path="/recruiter-view" element={<RecruiterView/>} />
         <Route path="/dashboard" element={<Dashboard
           data={{
             Chart: <DashboardCharts />,
