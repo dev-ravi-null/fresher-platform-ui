@@ -11,13 +11,19 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#1976d2",
+      main: "#1976d2", // Solid color
     },
     secondary: {
-      main: "#ff5722",
+      main: "#ff5722", // Solid color
+    },
+  },
+  custom: {
+    gradients: {
+      primary: "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
     },
   },
 });
+
 
 const Home = () => {
   return (
@@ -52,7 +58,7 @@ const Home = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   size="large"
                   sx={{ textTransform: "none" }}
                 >
