@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-function DashboardModal() {
+function DashboardModal({type}) {
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = () => {
@@ -31,16 +31,8 @@ function DashboardModal() {
       }}
     >
       <Typography variant="h5" component="h1" sx={{ mb: 3 }}>
-        Enter {} Details
+       Request For {type}
       </Typography>
-      <TextField
-        fullWidth
-        label="Enter Value"
-        variant="outlined"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        sx={{ mb: 2 }}
-      />
       <Button
         variant="contained"
         color="primary"

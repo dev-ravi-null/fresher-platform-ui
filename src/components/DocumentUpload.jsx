@@ -20,53 +20,89 @@ const DocumentUpload = ({ type }) => {
   const [message, setMessage] = useState("");
   const [fileInfos, setFileInfos] = useState([]);
 
+  // const upload = async () => {
+  //   if (!selectedFiles || selectedFiles.length === 0) {
+  //     setMessage("No file selected for upload!");
+  //     return;
+  //   }
+  //   const userId = "678d2f0a7221da2838c1d48d";
+  //       const formData = new FormData();
+  //       formData.append("file", selectedFiles); // Matches "photo"
+  //       formData.append("userId", userId);
+      
+  //       try {
+  //         const response = await fetch("https://fresher-backend.onrender.com/api/fresher-details/upload-photo", {
+  //           method: "POST",
+  //           body: formData,
+  //         });
+      
+  //         const result = await response.json();
+  //         if (response.ok) {
+  //           console.log("Photo uploaded successfully:", result);
+  //         } else {
+  //           console.error("Error uploading photo:", result.message);
+  //         }
+  //       } catch (error) {
+  //         console.error("Unexpected error:", error);
+  //     }
+      
+  //   // const formData = new FormData();
+  //   // const endpoint = type === "Resume" ? uploadResume : uploadPhoto; // Select correct API endpoint
+  //   // formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]);
+  //   // formData.append("userId", "678d2f0a7221da2838c1d48d");
+
+  //   // setProgress(0);
+  //   // setCurrentFile(selectedFiles[0]);
+
+  //   // try {
+  //   //   await endpoint(formData);
+  //   //   setMessage("File uploaded successfully!");
+  //   //   setFileInfos((prevInfos) => [
+  //   //     ...prevInfos,
+  //   //     { name: selectedFiles[0].name, url: "#" }, // Use real URL if provided by backend
+  //   //   ]);
+  //   //   setCurrentFile(null);
+  //   // } catch (error) {
+  //   //   setMessage("Could not upload the file!");
+  //   //   console.error(error);
+  //   // }
+  // };
   const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
       setMessage("No file selected for upload!");
       return;
     }
-        const formData = new FormData();
-        formData.append("photo", file); // Matches "photo"
-        formData.append("userId", userId);
-      
-        try {
-          const response = await fetch("https://fresher-backend.onrender.com/api/fresher-details/upload-photo", {
-            method: "POST",
-            body: formData,
-          });
-      
-          const result = await response.json();
-          if (response.ok) {
-            console.log("Photo uploaded successfully:", result);
-          } else {
-            console.error("Error uploading photo:", result.message);
-          }
-        } catch (error) {
-          console.error("Unexpected error:", error);
+  
+    const userId = "678d2f0a7221da2838c1d48d";
+    const formData = new FormData();
+    formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]); // Correct key
+    formData.append("userId", userId);
+  
+    try {
+      const endpoint =
+        type === "Resume"
+          ? "https://fresher-backend.onrender.com/api/fresher-details/upload-resume"
+          : "https://fresher-backend.onrender.com/api/fresher-details/upload-photo";
+  
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        setMessage("File uploaded successfully!");
+        console.log(result);
+      } else {
+        setMessage(result.message || "Error uploading file!");
       }
-      
-    // const formData = new FormData();
-    // const endpoint = type === "Resume" ? uploadResume : uploadPhoto; // Select correct API endpoint
-    // formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]);
-    // formData.append("userId", "678d2f0a7221da2838c1d48d");
-
-    // setProgress(0);
-    // setCurrentFile(selectedFiles[0]);
-
-    // try {
-    //   await endpoint(formData);
-    //   setMessage("File uploaded successfully!");
-    //   setFileInfos((prevInfos) => [
-    //     ...prevInfos,
-    //     { name: selectedFiles[0].name, url: "#" }, // Use real URL if provided by backend
-    //   ]);
-    //   setCurrentFile(null);
-    // } catch (error) {
-    //   setMessage("Could not upload the file!");
-    //   console.error(error);
-    // }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      setMessage("Unexpected error occurred!");
+    }
   };
-
+  
   const onDrop = (files) => {
     if (files.length > 0) {
       setSelectedFiles(files);
@@ -122,7 +158,7 @@ const DocumentUpload = ({ type }) => {
         variant="contained"
         color="primary"
         disabled={!selectedFiles}
-        onClick={upload}
+        onClick={upload} 
         sx={{ mb: 3 }}
       >
         Upload

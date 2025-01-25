@@ -23,10 +23,10 @@ const App = () => {
           data={{
             ProfilePhoto: <DocumentUpload type="Photo" />,
             Resume: <DocumentUpload type="Resume" />,
-            Commits: <DashboardModal />,
-            Interview: <div>Interview Content</div>,
+            Commits: <DashboardModal type="Commits" />,
+            Interview: <DashboardModal type="Interview" />,
             Skills: <SkillsModal />,
-            logout:<div>anuj</div>
+            Logout: <div></div>
           }}
         />
         }
