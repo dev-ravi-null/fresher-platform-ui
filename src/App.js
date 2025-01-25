@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import DocumentUpload from './components/DocumentUpload';
 import SkillsModal from './components/SkillsModal';
 import DashboardModal from './components/DashboardModal';
+import  DashboardCharts  from './components/DashboardCharts';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/fresherdetails" element={<FresherDetails />} />
         <Route path="/dashboard" element={<Dashboard
           data={{
+            Chart: <DashboardCharts />,
             ProfilePhoto: <DocumentUpload type="Photo" />,
             Resume: <DocumentUpload type="Resume" />,
             Commits: <DashboardModal type="Commits" />,
