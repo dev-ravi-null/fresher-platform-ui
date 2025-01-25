@@ -48,6 +48,9 @@ const Dashboard = ({ data }) => {
         setOpenDialog(false);
         navigate('/');
     };
+    const handleClick = () => {
+        navigate('/recruiter-view'); 
+      }
 
     const drawerIcons = {
         chart: <AnalyticsIcon sx={{ color: 'green' }}/>,
@@ -104,8 +107,9 @@ const Dashboard = ({ data }) => {
                         Dashboard
                     </Typography>
                     <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
-                        <Button variant="contained">Recruiter View</Button>
-                        <Button variant="contained">Live</Button>
+                    <Button variant="contained" onClick={handleClick}>
+      Recruiter View
+    </Button>                        <Button variant="contained">Live</Button>
                     </Box>
                 </Toolbar>
             </AppBar>
