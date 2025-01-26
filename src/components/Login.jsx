@@ -3,9 +3,14 @@ import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
-import { loginUser } from '../api/api'
-// login section
+import { loginUser } from '../api/api';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialValues = {
     email: '',
     password: '',
@@ -17,7 +22,7 @@ const Login = () => {
   });
 
   const handleSubmit = (values) => {
-    loginUser(values);
+    loginUser(values, navigate, dispatch);
   };
 
   return (
@@ -32,7 +37,7 @@ const Login = () => {
           borderRadius: 2,
           backgroundColor: '#ffffff',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
       >
         <Typography variant="h4" gutterBottom textAlign="center" color="primary" fontWeight="bold">
