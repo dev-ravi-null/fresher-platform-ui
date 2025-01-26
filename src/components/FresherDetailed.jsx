@@ -13,16 +13,32 @@ import {
 } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useNavigate } from "react-router";
 
 const FresherDetailed = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/dashboard")
+  }
   return (
     <Box>
       {/* Header Section */}
-      <AppBar position="static" sx={{ background: "#0d6efd" }}>
+      <AppBar position="static"
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)",
+          color: "#fff",
+        }}
+      >
         <Toolbar>
           <Typography variant="h5" sx={{ fontWeight: "bold", color: "#fff" }}>
             Fresher Profile
           </Typography>
+          <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
+            <Button variant="contained" onClick={handleClick}>
+              Dashboard
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
 

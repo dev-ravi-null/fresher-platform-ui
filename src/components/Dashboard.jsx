@@ -49,14 +49,14 @@ const Dashboard = ({ data }) => {
         navigate('/');
     };
     const handleClick = () => {
-        navigate('/recruiter-view'); 
-        
-      }
-    const goLive=()=>{
-        navigate('/fresherdetails'); 
+        navigate('/recruiter-view');
+
+    }
+    const goLive = () => {
+        navigate('/fresherdetails');
     }
     const drawerIcons = {
-        chart: <AnalyticsIcon sx={{ color: 'green' }}/>,
+        chart: <AnalyticsIcon sx={{ color: 'green' }} />,
         profilephoto: <AccountCircleIcon sx={{ color: 'green' }} />,
         resume: <DescriptionIcon sx={{ color: 'green' }} />,
         commits: <CodeIcon sx={{ color: 'green' }} />,
@@ -110,9 +110,9 @@ const Dashboard = ({ data }) => {
                         Dashboard
                     </Typography>
                     <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
-                    <Button variant="contained" onClick={handleClick}>
-      Recruiter View
-    </Button>                        <Button variant="contained"onClick={goLive}>Live</Button>
+                        <Button variant="contained" onClick={handleClick}>
+                            Recruiter View
+                        </Button>                        <Button variant="contained" onClick={goLive}>Live</Button>
                     </Box>
                 </Toolbar>
             </AppBar>

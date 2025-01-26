@@ -20,7 +20,7 @@ const DashboardCharts = () => {
         labels: ['Completed', 'Remaining'],
         datasets: [
             {
-                data: [50, 50],
+                data: [70, 50],
                 backgroundColor: ['#2196f3', '#ffc107'],
                 borderWidth: 1,
             },
@@ -31,7 +31,7 @@ const DashboardCharts = () => {
         labels: ['Skills Acquired', 'Remaining'],
         datasets: [
             {
-                data: [80, 20],
+                data: [40, 20],
                 backgroundColor: ['#8e44ad', '#ecf0f1'],
                 borderWidth: 1,
             },
@@ -42,7 +42,7 @@ const DashboardCharts = () => {
         labels: ['Completed', 'Pending'],
         datasets: [
             {
-                data: [60, 40],
+                data: [10, 40],
                 backgroundColor: ['#e74c3c', '#2ecc71'],
                 borderWidth: 1,
             },
