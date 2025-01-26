@@ -50,8 +50,11 @@ const Dashboard = ({ data }) => {
     };
     const handleClick = () => {
         navigate('/recruiter-view'); 
+        
       }
-
+    const goLive=()=>{
+        navigate('/fresherdetails'); 
+    }
     const drawerIcons = {
         chart: <AnalyticsIcon sx={{ color: 'green' }}/>,
         profilephoto: <AccountCircleIcon sx={{ color: 'green' }} />,
@@ -109,7 +112,7 @@ const Dashboard = ({ data }) => {
                     <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
                     <Button variant="contained" onClick={handleClick}>
       Recruiter View
-    </Button>                        <Button variant="contained">Live</Button>
+    </Button>                        <Button variant="contained"onClick={goLive}>Live</Button>
                     </Box>
                 </Toolbar>
             </AppBar>
