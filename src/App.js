@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import { Home } from './components/Home';
-import FresherDetails from './components/FresherDetails';
+import FresherDetails from './components/FresherDetailed';
 import Dashboard from './components/Dashboard';
 import DocumentUpload from './components/DocumentUpload';
 import SkillsModal from './components/SkillsModal';
