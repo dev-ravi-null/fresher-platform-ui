@@ -37,7 +37,12 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" color="primary"
+      sx={{
+        backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)",
+        color: "#fff",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -126,7 +131,7 @@ function Header() {
               </Link>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -154,7 +159,7 @@ function Header() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
