@@ -9,6 +9,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import {
     Sidebar,
     Menu,
@@ -27,9 +28,10 @@ const RecruiterView = () => {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
     const dashboardNavigate = () => {
         navigate('/dashboard');
-    }
+    };
 
     const sampleJobs = Array.from({ length: 12 }, (_, index) => ({
         title: `Job Title ${index + 1}`,
@@ -39,10 +41,9 @@ const RecruiterView = () => {
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     }));
 
-
     return (
         <ProSidebarProvider>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
                 {/* AppBar */}
                 <AppBar
                     position="fixed"
@@ -65,8 +66,8 @@ const RecruiterView = () => {
                             Recruiter View
                         </Typography>
                         <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
-                            <Button variant="contained" onClick={dashboardNavigate} >
-                                Dashbaord
+                            <Button variant="contained" onClick={dashboardNavigate}>
+                                Dashboard
                             </Button>
                         </Box>
                     </Toolbar>
@@ -146,6 +147,21 @@ const RecruiterView = () => {
                             </Grid>
                         ))}
                     </Grid>
+                </Box>
+                <Box
+                    sx={{
+                        backgroundColor: "gray",
+                        py: 3,
+                        textAlign: "center",
+                        width: "100%",
+                        mt: "auto",
+                    }}
+                >
+                    <Container>
+                        <Typography variant="body2" color="textSecondary">
+                            © 2025 Radiant Coder. All rights reserved.
+                        </Typography>
+                    </Container>
                 </Box>
             </Box>
         </ProSidebarProvider>
