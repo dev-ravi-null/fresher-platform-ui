@@ -82,13 +82,6 @@ const Home = () => {
           </Container>
         </Box>
       </ThemeProvider>
-      <Box sx={{ backgroundColor: "gray", py: 3, position: "relative", bottom: 0, width: "100%" }}>
-        <Container sx={{ textAlign: "center" }}>
-          <Typography variant="body2" color="textSecondary">
-            © 2025 Radiant Coder. All rights reserved.
-          </Typography>
-        </Container>
-      </Box>
     </>
 
   );

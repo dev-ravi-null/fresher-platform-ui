@@ -148,21 +148,6 @@ const RecruiterView = () => {
                         ))}
                     </Grid>
                 </Box>
-                <Box
-                    sx={{
-                        backgroundColor: "gray",
-                        py: 3,
-                        textAlign: "center",
-                        width: "100%",
-                        mt: "auto",
-                    }}
-                >
-                    <Container>
-                        <Typography variant="body2" color="textSecondary">
-                            © 2025 Radiant Coder. All rights reserved.
-                        </Typography>
-                    </Container>
-                </Box>
             </Box>
         </ProSidebarProvider>
     );
