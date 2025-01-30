@@ -38,17 +38,6 @@ const DashboardCharts = () => {
         ],
     };
 
-    // const resumeData = {
-    //     labels: ['Completed', 'Pending'],
-    //     datasets: [
-    //         {
-    //             data: [10, 40],
-    //             backgroundColor: ['#e74c3c', '#2ecc71'],
-    //             borderWidth: 1,
-    //         },
-    //     ],
-    // };
-
     return (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', padding: '60px' }}>
             <div>
@@ -72,16 +61,6 @@ const DashboardCharts = () => {
                     }}
                 />
             </div>
-            {/* <div>
-                <h3>Resume Progress</h3>
-                <Line
-                    data={resumeData}
-                    options={{
-                        tension: 0.4,
-                        fill: true,
-                    }}
-                />
-            </div> */}
         </div>
     );
 };
