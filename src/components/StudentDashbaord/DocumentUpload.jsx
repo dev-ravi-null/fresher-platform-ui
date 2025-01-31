@@ -12,7 +12,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useDropzone } from "react-dropzone";
-import { uploadPhoto, uploadResume } from "../api/api";
+import { uploadPhoto, uploadResume } from "../../api/api";
 const DocumentUpload = ({ type }) => {
   const [selectedFiles, setSelectedFiles] = useState(null);
   const [currentFile, setCurrentFile] = useState(null);
