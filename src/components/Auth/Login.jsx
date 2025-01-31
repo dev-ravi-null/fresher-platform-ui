@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, TextField, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import Header from './Header';
-import { loginUser } from '../api/api';
+import Header from '../LandingPage/Header';
+import { loginUser } from '../../api/api';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

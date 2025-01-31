@@ -2,17 +2,17 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import { Home } from './components/Home';
-import FresherDetails from './components/FresherDetailed';
-import Dashboard from './components/Dashboard';
-import DocumentUpload from './components/DocumentUpload';
-import SkillsModal from './components/SkillsModal';
-import DashboardModal from './components/DashboardModal';
-import DashboardCharts from './components/DashboardCharts';
-import RecruiterView from './components/RecruiterView';
-import ProcessingPage from './components/ProcessingPage';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
+import { Home } from './components/LandingPage/Home';
+import FresherDetails from './components/StudentDashbaord/FresherDetailed';
+import Dashboard from './components/StudentDashbaord/Dashboard';
+import DocumentUpload from './components/StudentDashbaord/DocumentUpload';
+import SkillsModal from './components/StudentDashbaord/SkillsModal';
+import DashboardModal from './components/StudentDashbaord/DashboardModal';
+import DashboardCharts from './components/StudentDashbaord/DashboardCharts';
+import RecruiterView from './components/Recruiter/RecruiterView';
+import ProcessingPage from './components/LandingPage/ProcessingPage';
 
 const App = () => {
   return (

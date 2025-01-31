@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import { Box, Typography, Button, Grid, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import JobIllustration from "../img/landing_page.svg"; // Adjust the path as needed
+import JobIllustration from "../../img/landing_page.svg"; // Adjust the path as needed
 
 const theme = createTheme({
   typography: {

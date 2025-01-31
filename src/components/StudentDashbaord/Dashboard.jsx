@@ -209,7 +209,7 @@ import {
     fetchDetailsStart,
     fetchDetailsSuccess,
     fetchDetailsFailure,
-} from '../redux/fresherDetailsSlice';
+} from '../../redux/fresherDetailsSlice';
 import DashboardCharts from './DashboardCharts';
 
 const drawerWidth = 240;
