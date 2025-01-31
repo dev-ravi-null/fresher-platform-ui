@@ -199,7 +199,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DescriptionIcon from '@mui/icons-material/Description';
 import CodeIcon from '@mui/icons-material/Code';
 import EventIcon from '@mui/icons-material/Event';
-import SkillsIcon from '@mui/icons-material/Build';
+import ComputerIcon from '@mui/icons-material/Computer';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ConfirmDialog from './ConfirmDialog';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
@@ -287,8 +287,7 @@ const Dashboard = ({ data }) => {
         profilephoto: <AccountCircleIcon sx={{ color: 'green' }} />,
         resume: <DescriptionIcon sx={{ color: 'green' }} />,
         commits: <CodeIcon sx={{ color: 'green' }} />,
-        interview: <EventIcon sx={{ color: 'green' }} />,
-        skills: <SkillsIcon sx={{ color: 'red' }} />,
+        skills: <ComputerIcon sx={{ color: 'green' }} />,
         logout: <LogoutIcon sx={{ color: 'red' }} />,
     };
 

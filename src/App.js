@@ -30,7 +30,6 @@ const App = () => {
             ProfilePhoto: <DocumentUpload type="Photo" />,
             Resume: <DocumentUpload type="Resume" />,
             Commits: <DashboardModal type="Commits" />,
-            Interview: <DashboardModal type="Interview" />,
             Skills: <SkillsModal />,
             Logout: <div></div>
           }}
