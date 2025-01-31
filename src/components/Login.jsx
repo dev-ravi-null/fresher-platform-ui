@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, TextField, Container, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, TextField, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loading state
 
   const initialValues = {
     email: '',
@@ -21,8 +22,15 @@ const Login = () => {
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
 
-  const handleSubmit = (values) => {
-    loginUser(values, navigate, dispatch);
+  const handleSubmit = async (values) => {
+    setLoading(true); // Start loading
+    try {
+      await loginUser(values, navigate, dispatch);
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      setLoading(false); // Stop loading after API call
+    }
   };
 
   return (
@@ -76,9 +84,11 @@ const Login = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                disabled={loading} // Disable button when loading
+                startIcon={loading ? <CircularProgress size={24} color="inherit" /> : null} // Show loader
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
               >
-                Login
+                {loading ? 'Logging in...' : 'Login'}
               </Button>
             </Form>
           )}

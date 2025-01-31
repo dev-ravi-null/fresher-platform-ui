@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, TextField, Container, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, TextField, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from './Header';
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loading state
+
   const initialValues = {
     name: '',
     email: '',
@@ -33,13 +35,14 @@ const Signup = () => {
       .required('Graduation Year is required'),
   });
 
-
   const handleSubmit = async (values) => {
-    // setIsLoading(true); // Start loading
+    setLoading(true); // Start loading
     try {
-      await signupUser(values, navigate); // Call the login API
+      await signupUser(values, navigate);
     } catch (error) {
-      console.error('Login failed:', error); // Log the error for debugging
+      console.error('Signup failed:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -66,11 +69,7 @@ const Signup = () => {
         >
           Signup
         </Typography>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
           {({ errors, touched }) => (
             <Form>
               <Box mb={3}>
@@ -146,13 +145,14 @@ const Signup = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
+                disabled={loading} // Disable button when loading
+                startIcon={loading ? <CircularProgress size={24} color="inherit" /> : null} // Show loader
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
               >
-                Signup
+                {loading ? 'Signing up...' : 'Signup'}
               </Button>
             </Form>
           )}
-          
         </Formik>
       </Container>
     </>
