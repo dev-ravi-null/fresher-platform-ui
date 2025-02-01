@@ -9,7 +9,7 @@ const DashboardCharts = () => {
         labels: ['Completed', 'Remaining'],
         datasets: [
             {
-                data: [100, 0],
+                data: [80, 20],
                 backgroundColor: ['#4caf50', '#f44336'],
                 borderWidth: 1,
             },
@@ -20,7 +20,7 @@ const DashboardCharts = () => {
         labels: ['Completed', 'Remaining'],
         datasets: [
             {
-                data: [70, 50],
+                data: [70, 30],
                 backgroundColor: ['#2196f3', '#ffc107'],
                 borderWidth: 1,
             },

@@ -31,6 +31,7 @@ import {
     fetchDetailsFailure,
 } from '../../redux/fresherDetailsSlice';
 import DashboardCharts from './DashboardCharts';
+import { getUserDetail } from '../../api/api';
 
 const drawerWidth = 240;
 
@@ -47,6 +48,11 @@ const Dashboard = ({ data }) => {
     );
     const userId = localStorage.getItem('userId');
 
+    useEffect(() => {
+        if (userId) {
+            getUserDetail(userId, dispatch);
+        }
+    }, [userId, dispatch]);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
