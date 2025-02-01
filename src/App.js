@@ -9,7 +9,7 @@ import FresherDetails from './components/StudentDashbaord/FresherDetailed';
 import Dashboard from './components/StudentDashbaord/Dashboard';
 import DocumentUpload from './components/StudentDashbaord/DocumentUpload';
 import SkillsModal from './components/StudentDashbaord/SkillsModal';
-import DashboardModal from './components/StudentDashbaord/DashboardModal';
+import DashboardModal from './components/StudentDashbaord/DashboardSummary';
 import DashboardCharts from './components/StudentDashbaord/DashboardCharts';
 import RecruiterView from './components/Recruiter/RecruiterView';
 import ProcessingPage from './components/LandingPage/ProcessingPage';
@@ -29,7 +29,7 @@ const App = () => {
             Chart: <DashboardCharts />,
             ProfilePhoto: <DocumentUpload type="Photo" />,
             Resume: <DocumentUpload type="Resume" />,
-            Commits: <DashboardModal type="Commits" />,
+            Report: <DashboardModal type="Commits" />,
             Skills: <SkillsModal />,
             Logout: <div></div>
           }}
