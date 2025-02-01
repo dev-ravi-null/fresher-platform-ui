@@ -9,17 +9,19 @@ const fresherDetailsSlice = createSlice({
   },
   reducers: {
     fetchDetailsStart: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchDetailsSuccess: (state, action) => {
-      state.loading = false;
-      state.data = action.payload;
-    },
-    fetchDetailsFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
+  state.loading = true;
+  state.error = null;
+},
+fetchDetailsSuccess: (state, action) => {
+  state.loading = false;
+  state.data = action.payload;
+  console.log("Redux Updated with Data:", state.data); // Debugging
+},
+
+  fetchDetailsFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
   },
 });
 
