@@ -23,6 +23,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ConfirmDialog from './ConfirmDialog';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import { useSelector, useDispatch } from 'react-redux';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 import axios from 'axios';
 import {
     fetchDetailsStart,
@@ -75,37 +76,11 @@ const Dashboard = ({ data }) => {
         navigate('/fresherdetails');
     };
 
-    // useEffect(() => {
-    //     // Retrieve token and userId from localStorage
-    //     const token = localStorage.getItem('token');
-    //     const userId = localStorage.getItem('userId');
-
-    //     const fetchFresherDetails = async () => {
-    //         try {
-    //             dispatch(fetchDetailsStart());
-    //             const response = await axios.get(
-    //                 `https://fresher-backend.onrender.com/api/fresher-details/${userId}`,
-    //                 {
-    //                     headers: { Authorization: `Bearer ${token}` },
-    //                 }
-    //             );
-    //             dispatch(fetchDetailsSuccess(response.data));
-    //         } catch (err) {
-    //             dispatch(fetchDetailsFailure(err.message));
-    //         }
-    //     };
-
-    //     if (userId && token) {
-    //         fetchFresherDetails();
-    //     }
-    // }, [dispatch]);
-
-
     const drawerIcons = {
         chart: <AnalyticsIcon sx={{ color: 'green' }} />,
         profilephoto: <AccountCircleIcon sx={{ color: 'green' }} />,
         resume: <DescriptionIcon sx={{ color: 'green' }} />,
-        commits: <CodeIcon sx={{ color: 'green' }} />,
+        report: <AssessmentIcon sx={{ color: 'green' }} />,
         skills: <ComputerIcon sx={{ color: 'green' }} />,
         logout: <LogoutIcon sx={{ color: 'red' }} />,
     };
