@@ -66,23 +66,24 @@ export default function DashboardSummary() {
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Month</StyledTableCell>
-              <StyledTableCell align="right">Commits</StyledTableCell>
-              <StyledTableCell align="right">Interviews</StyledTableCell>
-              <StyledTableCell align="right">Progress</StyledTableCell>
-              <StyledTableCell align="right">Action</StyledTableCell>
+              <StyledTableCell align="center">Month</StyledTableCell>
+              <StyledTableCell align="center">Commits</StyledTableCell>
+              <StyledTableCell align="center">Interviews</StyledTableCell>
+              <StyledTableCell align="center">Progress</StyledTableCell>
+              <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.month}>
-                <StyledTableCell component="th" scope="row">
+              <StyledTableRow key={row.month} align="center">
+                <StyledTableCell component="th" scope="row" align="center">
                   {row.month}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.commits}</StyledTableCell>
-                <StyledTableCell align="right">{row.interviews}</StyledTableCell>
-                <StyledTableCell align="right">{row.progress}</StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="center">{row.commits}</StyledTableCell>
+                <StyledTableCell align="center">{row.interviews}</StyledTableCell>
+                <StyledTableCell align="center">{row.progress}</StyledTableCell>
+                <StyledTableCell align="center" sx={{ ml: "20px" }}>
                   <Button variant="contained" color="primary" size="small">
                     Request Interview
                   </Button>

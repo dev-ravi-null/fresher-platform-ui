@@ -3,33 +3,27 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setCredentials } from '../redux/authSlice';
 import { jwtDecode } from 'jwt-decode';
+import { fetchDetailsSuccess, fetchDetailsFailure, fetchDetailsStart } from '../redux/fresherDetailsSlice';
 
 const api = axios.create({
   baseURL: 'https://fresher-backend.onrender.com/api',
 });
 
-
-const handleResponse = (response, navigate, dispatch) => {
+const handleLoginResponse = (response, navigate, dispatch) => {
   if (response.status === 200) {
     const { token } = response.data;
-
-    // Decode the token to extract user details
-    const decodedToken = jwtDecode(token); // Decodes the token
-    const userId = decodedToken.id; // Adjust this based on your token structure
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.id;
     const role = decodedToken.role;
 
     toast.success('Login successful!');
-
-    // Store token and user details in localStorage or sessionStorage
-    localStorage.setItem('token', token); // Or use sessionStorage
+    localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
     localStorage.setItem('role', role);
-
-    // Dispatch credentials to Redux store
     dispatch(setCredentials({ userId, token, role }));
 
-    // Navigate based on user role
     if (role === 'fresher') {
+      getUserDetail(userId, dispatch);
       navigate('/dashboard');
     } else if (role === 'recruiter') {
       navigate('/recruiter-view');
@@ -41,75 +35,64 @@ const handleResponse = (response, navigate, dispatch) => {
   }
 };
 
-
-export const getUser = (data, navigate) => {
-  return api
-    .post('/auth/fresher/signup', data)
-    .then((response) => handleResponse(response, navigate))
-    .catch((error) => handleError(error, navigate)); // Handle errors and navigate
-};
-
-// Handle API errors
-const handleError = (error, navigate) => {
+const handleError = (error) => {
   if (error.response) {
-    // Handle specific error messages from the server
-    toast.error(error.response.data.message || 'Login failed!');
+    toast.error(error.response.data.message || 'Invalid Status');
   } else {
-    // Handle network or unknown errors
     toast.error('Network error, please try again!');
   }
+  throw error;
 };
 
-// Login User
 export const loginUser = (credentials, navigate, dispatch) => {
   return api
     .post('/auth/fresher/login', credentials)
-    .then((response) => handleResponse(response, navigate, dispatch))
-    .catch((error) => handleError(error, navigate));
+    .then((response) => handleLoginResponse(response, navigate, dispatch))
+    .catch(handleError);
 };
 
 export const signupUser = (data, navigate) => {
   return api
     .post('/auth/fresher/signup', data)
-    .then((response) => handleResponse(response, navigate))
-    .catch((error) => handleError(error, navigate)); // Handle errors and navigate
+    .then((response) => {
+      toast.success('Signup successful! Please log in.');
+      navigate('/login');
+    })
+    .catch(handleError);
 };
 
+export const getUserDetail = async (userId, dispatch) => {
+  try {
+    dispatch(fetchDetailsStart()); // Set loading state
+
+    const response = await api.get(`/fresher-details/${userId}`); // Use GET request
+    dispatch(fetchDetailsSuccess(response.data)); // Save data in Redux store
+
+    return response.data; // Return data for further use
+  } catch (error) {
+    dispatch(fetchDetailsFailure(error.response?.data?.message || "Failed to fetch details"));
+    console.error("Error fetching user details:", error);
+  }
+};
 
 export const uploadPhoto = (data) => {
   return api
-    .post('/fresher-details/upload-resume', data)
+    .post('/fresher-details/upload-photo', data)
     .then((response) => {
       toast.success('Photo uploaded successfully!');
       return response.data;
     })
-    .catch((error) => {
-      if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else if (error.message) {
-        toast.error(error.message);
-      } else {
-        toast.error('An unexpected error occurred.');
-      }
-      throw error;
-    });
+    .catch(handleError);
 };
+
 export const uploadResume = (data) => {
   return api
-    .post('/fresher-details', data)
+    .post('/fresher-details/upload-resume', data)
     .then((response) => {
-      toast.success('Photo uploaded successfully!');
+      toast.success('Resume uploaded successfully!');
       return response.data;
     })
-    .catch((error) => {
-      if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else if (error.message) {
-        toast.error(error.message);
-      } else {
-        toast.error('An unexpected error occurred.');
-      }
-      throw error;
-    });
+    .catch(handleError);
 };
+
 export default api;
