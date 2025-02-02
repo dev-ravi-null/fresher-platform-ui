@@ -50,7 +50,7 @@ export default function DashboardSummary() {
         variant="h5"
         sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}
       >
-        Monthly Progress Overview
+        Monthly Progress
       </Typography>
       <TableContainer
         component={Paper}
