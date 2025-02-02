@@ -32,12 +32,12 @@ const FresherDetailed = () => {
       >
         <Toolbar>
           <Typography variant="h5" sx={{ fontWeight: "bold", color: "#fff" }}>
-            Fresher Profile
+            Radiant Coder
           </Typography>
           <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
             <Button variant="contained" onClick={handleClick}>
               Dashboard
-            </Button>
+            </Button>  
           </Box>
         </Toolbar>
       </AppBar>
