@@ -6,103 +6,65 @@ import {
   Typography,
   Card,
   CardContent,
-  List,
-  ListItem,
-  ListItemText,
   Alert,
 } from "@mui/material";
 import { useDropzone } from "react-dropzone";
-import { uploadPhoto, uploadResume } from "../../api/api";
+import { useSelector } from "react-redux";
+import { PDFDocument } from "pdf-lib"; // Import pdf-lib
+import axios from "axios"; // For fetching raw file data
+
 const DocumentUpload = ({ type }) => {
   const [selectedFiles, setSelectedFiles] = useState(null);
-  const [currentFile, setCurrentFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const [fileInfos, setFileInfos] = useState([]);
+  const [pdfUrl, setPdfUrl] = useState(null);
 
-  // const upload = async () => {
-  //   if (!selectedFiles || selectedFiles.length === 0) {
-  //     setMessage("No file selected for upload!");
-  //     return;
-  //   }
-  //   const userId = "678d2f0a7221da2838c1d48d";
-  //       const formData = new FormData();
-  //       formData.append("file", selectedFiles); // Matches "photo"
-  //       formData.append("userId", userId);
-      
-  //       try {
-  //         const response = await fetch("https://fresher-backend.onrender.com/api/fresher-details/upload-photo", {
-  //           method: "POST",
-  //           body: formData,
-  //         });
-      
-  //         const result = await response.json();
-  //         if (response.ok) {
-  //           console.log("Photo uploaded successfully:", result);
-  //         } else {
-  //           console.error("Error uploading photo:", result.message);
-  //         }
-  //       } catch (error) {
-  //         console.error("Unexpected error:", error);
-  //     }
-      
-  //   // const formData = new FormData();
-  //   // const endpoint = type === "Resume" ? uploadResume : uploadPhoto; // Select correct API endpoint
-  //   // formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]);
-  //   // formData.append("userId", "678d2f0a7221da2838c1d48d");
+  // Extracting data from Redux
+  const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
+  const storedPhoto = fresherDetails?.photo || null;
+  const storedResume = fresherDetails?.resume || null;
 
-  //   // setProgress(0);
-  //   // setCurrentFile(selectedFiles[0]);
-
-  //   // try {
-  //   //   await endpoint(formData);
-  //   //   setMessage("File uploaded successfully!");
-  //   //   setFileInfos((prevInfos) => [
-  //   //     ...prevInfos,
-  //   //     { name: selectedFiles[0].name, url: "#" }, // Use real URL if provided by backend
-  //   //   ]);
-  //   //   setCurrentFile(null);
-  //   // } catch (error) {
-  //   //   setMessage("Could not upload the file!");
-  //   //   console.error(error);
-  //   // }
-  // };
+  // Handle file upload
   const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
       setMessage("No file selected for upload!");
       return;
     }
-  
+
     const userId = "678d2f0a7221da2838c1d48d";
     const formData = new FormData();
-    formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]); // Correct key
+    formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]);
     formData.append("userId", userId);
-  
+
     try {
       const endpoint =
         type === "Resume"
           ? "https://fresher-backend.onrender.com/api/fresher-details/upload-resume"
           : "https://fresher-backend.onrender.com/api/fresher-details/upload-photo";
-  
+
       const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
       });
-  
+
       const result = await response.json();
-  
+
       if (response.ok) {
-        setMessage("File uploaded successfully!");
+        setMessage(`${type} uploaded successfully!`);
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
         console.log(result);
       } else {
-        setMessage(result.message || "Error uploading file!");
+        setMessage(result.message || `Error uploading ${type}!`);
       }
     } catch (error) {
       console.error("Unexpected error:", error);
       setMessage("Unexpected error occurred!");
     }
   };
-  
+
+  // Handle dropzone file selection
   const onDrop = (files) => {
     if (files.length > 0) {
       setSelectedFiles(files);
@@ -112,8 +74,51 @@ const DocumentUpload = ({ type }) => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
-    accept: type === "Resume" ? "application/pdf" : "image/*", // Accept only relevant file types
+    accept: type === "Resume" ? "application/pdf" : "image/*",
   });
+
+  // Convert raw image to PDF
+  const convertImageToPdf = async (imageData) => {
+    // Create a PDF document
+    const pdfDoc = await PDFDocument.create();
+
+    // Embed image (assuming imageData is a Blob)
+    const image = await pdfDoc.embedJpg(imageData); // or embedPng depending on the image format
+    const { width, height } = image.scale(0.5); // Scale the image to fit nicely
+
+    // Add a page and draw the image
+    const page = pdfDoc.addPage();
+    page.drawImage(image, {
+      x: 50,
+      y: 500,
+      width,
+      height,
+    });
+
+    // Save the PDF and create a URL to display it
+    const pdfBytes = await pdfDoc.save();
+    const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    setPdfUrl(pdfUrl);
+  };
+
+  // Fetch image file and convert to PDF after drop/upload
+  const handleImageUpload = async (file) => {
+    const imageData = await readFileAsBlob(file);
+    convertImageToPdf(imageData);
+  };
+
+  const readFileAsBlob = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  };
 
   return (
     <Box sx={{ p: 4 }}>
@@ -121,7 +126,7 @@ const DocumentUpload = ({ type }) => {
         {type} Upload
       </Typography>
 
-      {currentFile && (
+      {progress > 0 && (
         <Box sx={{ mb: 3 }}>
           <LinearProgress variant="determinate" value={progress} />
           <Typography variant="body2" color="textSecondary">
@@ -158,7 +163,7 @@ const DocumentUpload = ({ type }) => {
         variant="contained"
         color="primary"
         disabled={!selectedFiles}
-        onClick={upload} 
+        onClick={upload}
         sx={{ mb: 3 }}
       >
         Upload
@@ -173,30 +178,36 @@ const DocumentUpload = ({ type }) => {
         </Alert>
       )}
 
-      {fileInfos.length > 0 && (
+      {/* Show uploaded photo */}
+      {type === "Photo" && storedPhoto && (
+        <Card style={{ width: "370px", height: "370px", borderRadius: "8px" }}>
+          <CardContent>
+            <img
+              src={storedPhoto}
+              alt="Uploaded"
+              style={{ width: "350px", height: "350px", borderRadius: "8px" }}
+            />
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Show resume PDF as an embedded document */}
+      {type === "Resume" && storedResume && (
         <Card>
           <CardContent>
             <Typography variant="h6" gutterBottom>
-              Uploaded Files
+              Uploaded Resume
             </Typography>
-            <List>
-              {fileInfos.map((file, index) => (
-                <ListItem key={index} divider>
-                  <ListItemText
-                    primary={file.name}
-                    secondary={
-                      <a
-                        href={file.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View File
-                      </a>
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
+            {/* Show the PDF URL if converted */}
+            {pdfUrl && (
+              <iframe
+                src={pdfUrl}
+                title="Converted PDF"
+                width="100%"
+                height="500px"
+                style={{ border: "none", marginTop: "10px" }}
+              />
+            )}
           </CardContent>
         </Card>
       )}
