@@ -36,7 +36,7 @@ const Signup = () => {
   });
 
   const handleSubmit = async (values) => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     try {
       await signupUser(values, navigate);
     } catch (error) {
