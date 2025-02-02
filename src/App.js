@@ -29,7 +29,7 @@ const App = () => {
             Chart: <DashboardCharts />,
             ProfilePhoto: <DocumentUpload type="Photo" />,
             Resume: <DocumentUpload type="Resume" />,
-            Report: <DashboardModal type="Commits" />,
+            Report: <DashboardModal />,
             Skills: <SkillsModal />,
             Logout: <div></div>
           }}
