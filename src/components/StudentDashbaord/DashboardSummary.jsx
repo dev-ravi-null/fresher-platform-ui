@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,38 +32,36 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(month, commits, interviews, progress) {
-  return { month, commits, interviews, progress };
-}
+const DashboardSummary = () => {
+  const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
+  const commits = fresherDetails?.commits?.length || 0;
+  const interviews = fresherDetails?.interviews?.length || 0;
+  const createdAt = new Date(fresherDetails?.createdAt);
+  debugger;
 
-const rows = [
-  createData("January", 159, 2, "50%"),
-  createData("February", 237, 3, "70%"),
-  createData("March", 262, 1, "40%"),
-  createData("April", 305, 4, "80%"),
-  createData("May", 356, 5, "90%"),
-];
+  const months = [];
+  const date = new Date(createdAt); // Single date variable
 
-export default function DashboardSummary() {
+  for (let i = 0; i < 5; i++) {
+    let month = new Date(createdAt);
+    month.setMonth(month.getMonth() + i);
+    months.push(month.toLocaleString("default", { month: "long" }));
+  }
+
+  debugger;
+  const commitValues = [0, 0, 0, 0, 0];
+  const interviewValues = [0, 0, 0, 0, 0];
+  const progressValues = [0, 0, 0, 0, 0];
+
+  console.log("Months:", months);
+  console.log("Date:", date.toISOString().split("T")[0]); // Formatted as YYYY-MM-DD
+
   return (
     <Box sx={{ width: "100%", overflowX: "auto" }}>
-      <Typography
-        variant="h5"
-        sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}
-      >
+      <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
         Monthly Progress
       </Typography>
-      <TableContainer
-        component={Paper}
-        sx={{
-          width: "100%",
-          overflowX: "auto",
-          "@media (max-width: 600px)": {
-            width: "100vw",
-            overflowX: "scroll",
-          },
-        }}
-      >
+      <TableContainer component={Paper} sx={{ width: "100%", overflowX: "auto" }}>
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -73,26 +72,34 @@ export default function DashboardSummary() {
               <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.month} align="center">
-                <StyledTableCell component="th" scope="row" align="center">
-                  {row.month}
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.commits}</StyledTableCell>
-                <StyledTableCell align="center">{row.interviews}</StyledTableCell>
-                <StyledTableCell align="center">{row.progress}</StyledTableCell>
-                <StyledTableCell align="center" sx={{ ml: "20px" }}>
-                  <Button variant="contained" color="primary" size="small">
-                    Request Interview
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
+            {months.map((month, index) => {
+              const createdAtDate = new Date(createdAt);
+              createdAtDate.setMonth(createdAtDate.getMonth() + index);
+              const daysSinceCreation = (new Date() - createdAtDate) / (1000 * 60 * 60 * 24);
+              const isDisabled = daysSinceCreation < 28;
+
+              return (
+                <StyledTableRow key={month} align="center">
+                  <StyledTableCell component="th" scope="row" align="center">
+                    {month}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{commitValues[index]}</StyledTableCell>
+                  <StyledTableCell align="center">{interviewValues[index]}</StyledTableCell>
+                  <StyledTableCell align="center">{progressValues[index]}%</StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Button variant="contained" color="primary" size="small" disabled={isDisabled}>
+                      Request Interview
+                    </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
     </Box>
   );
-}
+};
+
+export default DashboardSummary;
