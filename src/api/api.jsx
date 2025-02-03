@@ -8,7 +8,7 @@ import { fetchDetailsSuccess, fetchDetailsFailure, fetchDetailsStart } from '../
 const api = axios.create({
   baseURL: 'https://fresher-backend.onrender.com/api',
 });
-
+var userId = localStorage.getItem("userId")
 const handleLoginResponse = (response, navigate, dispatch) => {
   if (response.status === 200) {
     const { token } = response.data;
@@ -95,4 +95,14 @@ export const uploadResume = (data) => {
     .catch(handleError);
 };
 
+export const updateSkillsModal = (data) => {
+  return api
+    .post('/fresher-details/add', data)
+    .then((response) => {
+      toast.success(response.data.message);
+      getUserDetail(data.userId, dispatch);
+      return response.data;
+    })
+    .catch(handleError);
+};
 export default api;
