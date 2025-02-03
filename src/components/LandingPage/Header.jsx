@@ -19,6 +19,42 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [countdown, setCountdown] = React.useState(getTimeRemaining());
+
+  // Function to calculate time remaining from now to 10th Feb 2025
+  function getTimeRemaining() {
+    const targetDate = new Date('2025-02-10T00:00:00'); // Target date: 10th Feb 2025 at midnight
+    const currentDate = new Date();
+    const timeDiff = targetDate - currentDate; // Difference in milliseconds
+
+    // If the target date is already past
+    if (timeDiff <= 0) {
+      return 0;
+    }
+
+    return timeDiff;
+  }
+
+  // Start countdown on mount and update every second
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(getTimeRemaining()); // Update countdown every second
+    }, 1000);
+
+    return () => clearInterval(timer); // Cleanup on unmount
+  }, []);
+
+  // Format the time in DD:HH:MM:SS format
+  const formatTime = (timeInMillis) => {
+    const totalSeconds = Math.floor(timeInMillis / 1000); // Convert milliseconds to seconds
+    const days = Math.floor(totalSeconds / (24 * 60 * 60)); // Calculate days
+    const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / 3600); // Calculate hours
+    const minutes = Math.floor((totalSeconds % 3600) / 60); // Calculate minutes
+    const seconds = totalSeconds % 60; // Calculate seconds
+
+    return `${days}d ${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+  };
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -157,6 +193,12 @@ function Header() {
               ))}
             </Menu>
           </Box> */}
+           {/* Countdown Timer */}
+           <Box sx={{ display: 'flex', alignItems: 'center', ml: 3 }}>
+            <Typography variant="h6" color="inherit">
+              <b>Next Live : {formatTime(countdown)}</b>
+            </Typography>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
