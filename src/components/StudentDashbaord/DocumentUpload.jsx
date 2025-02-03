@@ -20,8 +20,8 @@ const DocumentUpload = ({ type }) => {
   const [loading, setLoading] = useState(false);
 
   const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
-  const storedPhoto = fresherDetails?.photo || null;
-  const storedResume = fresherDetails?.resume || null;
+  const storedPhoto = fresherDetails?.fresherDetails.photo || null;
+  const storedResume = fresherDetails?.fresherDetails.resume || null;
 
   const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
@@ -30,7 +30,7 @@ const DocumentUpload = ({ type }) => {
     }
 
     setLoading(true);
-    const userId = "678d2f0a7221da2838c1d48d";
+    const userId = localStorage.getItem("userId");
     const formData = new FormData();
     formData.append(type === "Resume" ? "resume" : "photo", selectedFiles[0]);
     formData.append("userId", userId);

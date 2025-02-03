@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { updateSkillsModal } from "../../api/api";
+import { useDispatch } from "react-redux";
 
 const skillsList = [
   "JavaScript",
@@ -28,6 +30,8 @@ const SkillsAndProjects = () => {
   const [selfProjects, setSelfProjects] = useState([
     { liveLink: "", githubLink: "", summary: "" },
   ]);
+  const dispatch = useDispatch();
+
 
   const handleAddProject = () => {
     setSelfProjects([...selfProjects, { liveLink: "", githubLink: "", summary: "" }]);
@@ -49,11 +53,19 @@ const SkillsAndProjects = () => {
       alert("Please fill in all fields for each project.");
       return;
     }
+    const dataToSend = {
+      userId: localStorage.getItem("userId"),
+      skills: selectedSkills,
+      selfProject: selfProjects,
+    }
+    const data = updateSkillsModal(dataToSend, dispatch)
+    // alert(`Submission Details:
+    //   Skills: ${selectedSkills.join(", ")}
+    //   Projects: ${JSON.stringify(selfProjects, null, 2)}
+    // `);
+    if (data) {
 
-    alert(`Submission Details:
-      Skills: ${selectedSkills.join(", ")}
-      Projects: ${JSON.stringify(selfProjects, null, 2)}
-    `);
+    }
 
     // Reset fields after submission
     setSelectedSkills([]);
