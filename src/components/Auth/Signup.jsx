@@ -145,11 +145,11 @@ const Signup = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
-                disabled={loading} // Disable button when loading
+                autoFocus={loading} // Disable button when loading
                 startIcon={loading ? <CircularProgress size={24} color="inherit" /> : null} // Show loader
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
               >
-                {loading ? 'Signing up...' : 'Signup'}
+                {loading ? ' ' : 'Signup'}
               </Button>
             </Form>
           )}
