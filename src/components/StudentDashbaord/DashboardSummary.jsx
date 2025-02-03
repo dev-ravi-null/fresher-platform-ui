@@ -33,12 +33,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const DashboardSummary = () => {
+  // Accessing fresher details from Redux state
   const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
-  const commits = fresherDetails?.commits?.length || 0;
-  const interviews = fresherDetails?.interviews?.length || 0;
-  const createdAt = new Date(fresherDetails?.createdAt);
-  debugger;
+  debugger
+  const profileSummary = fresherDetails?.profileSummary || []; // Extract profileSummary from fresherDetails
+  const createdAt = new Date(fresherDetails?.fresherDetails?.createdAt);
 
+  // Get the months array for the table
   const months = [];
   const date = new Date(createdAt); // Single date variable
 
@@ -48,18 +49,11 @@ const DashboardSummary = () => {
     months.push(month.toLocaleString("default", { month: "long" }));
   }
 
-  debugger;
-  const commitValues = [0, 0, 0, 0, 0];
-  const interviewValues = [0, 0, 0, 0, 0];
-  const progressValues = [0, 0, 0, 0, 0];
-
-  console.log("Months:", months);
-  console.log("Date:", date.toISOString().split("T")[0]); // Formatted as YYYY-MM-DD
-
   return (
     <Box sx={{ width: "100%", overflowX: "auto" }}>
       <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
-        Monthly Progress
+        Monthly Progress <br />
+        <p>Joining Date: {date.toISOString().split("T")[0]}</p>
       </Typography>
       <TableContainer component={Paper} sx={{ width: "100%", overflowX: "auto" }}>
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
@@ -79,16 +73,23 @@ const DashboardSummary = () => {
               const daysSinceCreation = (new Date() - createdAtDate) / (1000 * 60 * 60 * 24);
               const isDisabled = daysSinceCreation < 28;
 
+              // Extract the profile data for this month
+              const monthData = profileSummary[index] || {};
+              const commits = monthData.commits || 0;
+              const interview = monthData.interview || "Not Yet";
+              const progress = monthData.progress || 0;
+              const action = monthData.action || "False";
+
               return (
                 <StyledTableRow key={month} align="center">
                   <StyledTableCell component="th" scope="row" align="center">
                     {month}
                   </StyledTableCell>
-                  <StyledTableCell align="center">{commitValues[index]}</StyledTableCell>
-                  <StyledTableCell align="center">{interviewValues[index]}</StyledTableCell>
-                  <StyledTableCell align="center">{progressValues[index]}%</StyledTableCell>
+                  <StyledTableCell align="center">{commits}</StyledTableCell>
+                  <StyledTableCell align="center">{interview}</StyledTableCell>
+                  <StyledTableCell align="center">{progress}%</StyledTableCell>
                   <StyledTableCell align="center">
-                    <Button variant="contained" color="primary" size="small" disabled={isDisabled}>
+                    <Button variant="contained" color="primary" size="small" disabled={isDisabled || action === "False"}>
                       Request Interview
                     </Button>
                   </StyledTableCell>
