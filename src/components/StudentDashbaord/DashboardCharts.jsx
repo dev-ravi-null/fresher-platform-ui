@@ -39,7 +39,9 @@ const DashboardCharts = () => {
     };
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', padding: '60px' }}>
+        <>
+         <h6 style ={{ color: 'grey' }}>NOTE : 50 Commits and 1 interview should be complete in first month for listing your profile.</h6>
+         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '00px', padding: '00px' }}>
             <div>
                 <h3>Commits Progress</h3>
                 <Doughnut data={commitsData} />
@@ -61,7 +63,8 @@ const DashboardCharts = () => {
                     }}
                 />
             </div>
-        </div>
+         </div>
+        </>
     );
 };
 
