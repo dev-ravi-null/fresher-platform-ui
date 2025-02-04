@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { updateSkillsModal } from "../../api/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const skillsList = [
   "JavaScript",
@@ -26,12 +26,28 @@ const skillsList = [
 ];
 
 const SkillsAndProjects = () => {
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selfProjects, setSelfProjects] = useState([
-    { liveLink: "", githubLink: "", summary: "" },
-  ]);
   const dispatch = useDispatch();
+  const fresherDetails = useSelector((state) => state.fresherDetails.data.data).fresherDetails;
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selfProjects, setSelfProjects] = useState([{ liveLink: "", githubLink: "", summary: "" }]);
 
+  useEffect(() => {
+    if (fresherDetails) {
+      const fetchedData = fresherDetails
+      debugger
+      setSelectedSkills(fetchedData.skills || []);
+      debugger
+      if (fetchedData.selfProject && fetchedData.selfProject.length > 0) {
+        setSelfProjects(fetchedData.selfProject.map(project => ({
+          liveLink: project.liveLink || "",
+          githubLink: project.githubLink || "",
+          summary: project.summary || ""
+        })));
+      } else {
+        setSelfProjects([{ liveLink: "", githubLink: "", summary: "" }]);
+      }
+    }
+  }, [fresherDetails]);
 
   const handleAddProject = () => {
     setSelfProjects([...selfProjects, { liveLink: "", githubLink: "", summary: "" }]);
@@ -53,21 +69,17 @@ const SkillsAndProjects = () => {
       alert("Please fill in all fields for each project.");
       return;
     }
+
     const dataToSend = {
       userId: localStorage.getItem("userId"),
       skills: selectedSkills,
       selfProject: selfProjects,
-    }
-    const data = updateSkillsModal(dataToSend, dispatch)
-    // alert(`Submission Details:
-    //   Skills: ${selectedSkills.join(", ")}
-    //   Projects: ${JSON.stringify(selfProjects, null, 2)}
-    // `);
-    if (data) {
+    };
 
-    }
+    updateSkillsModal(dataToSend, dispatch);
 
-    // Reset fields after submission
+    // Reset form only if the update was successful (you might want to check the response from updateSkillsModal)
+    // For this example, I am resetting immediately.  You should add proper success handling.
     setSelectedSkills([]);
     setSelfProjects([{ liveLink: "", githubLink: "", summary: "" }]);
   };
@@ -87,6 +99,7 @@ const SkillsAndProjects = () => {
         borderRadius: 2,
       }}
     >
+      {/* ... (rest of your JSX -  the same as before) */}
       <Typography variant="h5" component="h2" sx={{ textAlign: "center", mb: 4 }}>
         Add Skills & Self Projects
       </Typography>
@@ -129,9 +142,7 @@ const SkillsAndProjects = () => {
               label="Live Link"
               fullWidth
               value={project.liveLink}
-              onChange={(e) =>
-                handleProjectChange(index, "liveLink", e.target.value)
-              }
+              onChange={(e) => handleProjectChange(index, "liveLink", e.target.value)}
               sx={{ mb: 2 }}
             />
             <TextField
@@ -139,9 +150,7 @@ const SkillsAndProjects = () => {
               label="GitHub Link"
               fullWidth
               value={project.githubLink}
-              onChange={(e) =>
-                handleProjectChange(index, "githubLink", e.target.value)
-              }
+              onChange={(e) => handleProjectChange(index, "githubLink", e.target.value)}
               sx={{ mb: 2 }}
             />
             <TextField
@@ -151,9 +160,7 @@ const SkillsAndProjects = () => {
               rows={3}
               fullWidth
               value={project.summary}
-              onChange={(e) =>
-                handleProjectChange(index, "summary", e.target.value)
-              }
+              onChange={(e) => handleProjectChange(index, "summary", e.target.value)}
               sx={{ mb: 2 }}
             />
           </Box>
