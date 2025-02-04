@@ -77,7 +77,7 @@ const DashboardCharts = () => {
                 </div>
                 <div>
                     <h3>Interview Preparation</h3>
-                    <Pie data={interviewData} />
+                    <Doughnut data={interviewData} />
                 </div>
                 <div>
                     <h3>Skills Acquired</h3>

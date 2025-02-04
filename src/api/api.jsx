@@ -50,13 +50,14 @@ export const loginUser = (credentials, navigate, dispatch) => {
     .then((response) => handleLoginResponse(response, navigate, dispatch))
     .catch(handleError);
 };
-
 export const signupUser = (data, navigate) => {
   return api
     .post('/auth/fresher/signup', data)
     .then((response) => {
-      toast.success('Signup successful! Please log in.');
-      navigate('/login');
+      toast.success(response.data.message); // Access message from response.data
+      setTimeout(() => { // Delay the redirection
+        navigate("/processing-page");
+      }, 3000); // 3000 milliseconds = 3 seconds (adjust as needed)
     })
     .catch(handleError);
 };
