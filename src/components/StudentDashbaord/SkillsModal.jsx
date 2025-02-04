@@ -90,9 +90,9 @@ const SkillsAndProjects = () => {
 
     // Reset form only if the update was successful (you might want to check the response from updateSkillsModal)
     // For this example, I am resetting immediately.  You should add proper success handling.
-    setSelectedSkills([]);
-    setSelfProjects([{ liveLink: "", githubLink: "", summary: "" }]);
-    setTimeout(() => location.reload());
+    // setSelectedSkills([]);
+    // setSelfProjects([{ liveLink: "", githubLink: "", summary: "" }]);
+    // setTimeout(() => location.reload());
   };
 
 

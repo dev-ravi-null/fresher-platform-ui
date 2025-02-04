@@ -65,8 +65,8 @@ const FresherDetailed = () => {
                         <Avatar src={details.photo} alt="Fresher" sx={{ width: 180, height: 180, boxShadow: 3 }} />
                     </Grid>
                     <Grid item xs={12} md={8}>
-                        <Typography variant="h4" sx={{ fontWeight: "bold" }}>{userId}</Typography>
-                        <Typography variant="body1" sx={{ mt: 2 }}><b>Email:</b> {userId}</Typography>
+                        <Typography variant="h4" sx={{ fontWeight: "bold" }}>{fresherDetails.userSchema.name}</Typography>
+                        <Typography variant="body1" sx={{ mt: 2 }}><b>Email:</b> {fresherDetails.userSchema.email}</Typography>
                         <Typography variant="body1" sx={{ mt: 1 }}><b>Phone:</b> {details.phone || "Not provided"}</Typography>
                     </Grid>
                 </Grid>
