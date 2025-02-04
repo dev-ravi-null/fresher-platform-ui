@@ -95,7 +95,7 @@ export const uploadResume = (data) => {
     .catch(handleError);
 };
 
-export const updateSkillsModal = (data) => {
+export const updateSkillsModal = (data, dispatch) => {
   return api
     .post('/fresher-details/add', data)
     .then((response) => {

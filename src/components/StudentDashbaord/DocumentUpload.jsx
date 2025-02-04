@@ -10,19 +10,18 @@ import {
 } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
-import { PDFDocument } from "pdf-lib";
+
 
 const DocumentUpload = ({ type }) => {
   const [selectedFiles, setSelectedFiles] = useState(null);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const [pdfUrl, setPdfUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
   const storedPhoto = fresherDetails?.fresherDetails.photo || null;
-  const storedResume = fresherDetails?.fresherDetails.resume || null;
-
+  let storedResume = fresherDetails?.fresherDetails.resume || null;
+  storedResume = `${storedResume}.pdf`
   const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
       setMessage("No file selected for upload!");
@@ -139,15 +138,7 @@ const DocumentUpload = ({ type }) => {
             <Typography variant="h6" gutterBottom>
               Uploaded Resume
             </Typography>
-            {pdfUrl && (
-              <iframe
-                src={pdfUrl}
-                title="Converted PDF"
-                width="100%"
-                height="500px"
-                style={{ border: "none", marginTop: "10px" }}
-              />
-            )}
+            <a href={storedResume} target="_blank" >View Resume</a>
           </CardContent>
         </Card>
       )}
