@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -32,16 +32,55 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const CountdownTimer = ({ joiningDate }) => {
+  const joiningTimestamp = new Date(joiningDate).getTime();
+  const targetTimestamp = joiningTimestamp + 28 * 24 * 60 * 60 * 1000; // 28 days added
+
+  const calculateTimeLeft = () => {
+    const now = new Date().getTime();
+    const difference = targetTimestamp - now;
+
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <Box sx={{ textAlign: "center", p: 2, border: "2px solid #33f0ff", borderRadius: "8px", boxShadow: 2, minWidth: 180 }}>
+      <Typography variant="h6" sx={{ fontWeight: "bold", }}>
+      Eligible for Interview
+      </Typography>
+      <Typography variant="body1">
+        {timeLeft.days}d : {timeLeft.hours}h : {timeLeft.minutes}m : {timeLeft.seconds}s
+      </Typography>
+    </Box>
+  );
+};
+
 const DashboardSummary = () => {
-  // Accessing fresher details from Redux state
   const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
-  debugger
-  const profileSummary = fresherDetails?.profileSummary || []; // Extract profileSummary from fresherDetails
+  const profileSummary = fresherDetails?.profileSummary || [];
   const createdAt = new Date(fresherDetails?.fresherDetails?.createdAt);
 
-  // Get the months array for the table
   const months = [];
-  const date = new Date(createdAt); // Single date variable
+  const date = new Date(createdAt);
 
   for (let i = 0; i < 5; i++) {
     let month = new Date(createdAt);
@@ -50,11 +89,18 @@ const DashboardSummary = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", overflowX: "auto" }}>
-      <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}>
-        Monthly Progress <br />
-        <p>Joining Date: {date.toISOString().split("T")[0]}</p>
-      </Typography>
+    <Box sx={{ width: "100%", overflowX: "auto", p: 2 }}>
+      {/* Centered Header & Right Aligned Countdown */}
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+        <Box sx={{ textAlign: "center", flexGrow: 1 }}>
+          <Typography variant="h5" sx={{ fontWeight: "bold", m:2, marginRight:1 }}>Monthly Progress</Typography>
+          <Typography variant="subtitle1">
+            Joining Date: <strong>{date.toISOString().split("T")[0]}</strong>
+          </Typography>
+        </Box>
+        <CountdownTimer joiningDate={date.toISOString().split("T")[0]} />
+      </Box>
+
       <TableContainer component={Paper} sx={{ width: "100%", overflowX: "auto" }}>
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
@@ -73,7 +119,6 @@ const DashboardSummary = () => {
               const daysSinceCreation = (new Date() - createdAtDate) / (1000 * 60 * 60 * 24);
               const isDisabled = daysSinceCreation < 28;
 
-              // Extract the profile data for this month
               const monthData = profileSummary[index] || {};
               const commits = monthData.commits || 0;
               const interview = monthData.interview || "Not Yet";
