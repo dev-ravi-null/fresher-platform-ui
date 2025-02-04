@@ -4,8 +4,12 @@ import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress"; // Import CircularProgress
+
 import { updateSkillsModal } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
 
 const skillsList = [
   "JavaScript",
@@ -27,9 +31,13 @@ const skillsList = [
 
 const SkillsAndProjects = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize navigate function
+
   const fresherDetails = useSelector((state) => state.fresherDetails.data.data).fresherDetails;
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selfProjects, setSelfProjects] = useState([{ liveLink: "", githubLink: "", summary: "" }]);
+  const [loading, setLoading] = useState(false); // Add loading state
+
 
   useEffect(() => {
     if (fresherDetails) {
@@ -69,6 +77,8 @@ const SkillsAndProjects = () => {
       alert("Please fill in all fields for each project.");
       return;
     }
+    setLoading(true); // Set loading to true when the form is being submitted
+
 
     const dataToSend = {
       userId: localStorage.getItem("userId"),
@@ -82,7 +92,9 @@ const SkillsAndProjects = () => {
     // For this example, I am resetting immediately.  You should add proper success handling.
     setSelectedSkills([]);
     setSelfProjects([{ liveLink: "", githubLink: "", summary: "" }]);
+    setTimeout(() => location.reload());
   };
+
 
   return (
     <Box
@@ -176,8 +188,12 @@ const SkillsAndProjects = () => {
       </Box>
 
       {/* Submit Button */}
-      <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-        Submit
+      <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading} >
+      {loading ? (
+          <CircularProgress size={24} sx={{ color: "white" }} /> // Show spinner when loading
+        ) : (
+          "Submit"
+        )}
       </Button>
     </Box>
   );
