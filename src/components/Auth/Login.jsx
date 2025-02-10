@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, TextField, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import Header from './Header';
-import { loginUser } from '../api/api';
+import Header from '../LandingPage/Header';
+import { loginUser } from '../../api/api';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -84,11 +84,11 @@ const Login = () => {
                 variant="contained"
                 color="primary"
                 fullWidth
-                disabled={loading} // Disable button when loading
+                disabled={loading } // Disable button when loading
                 startIcon={loading ? <CircularProgress size={24} color="inherit" /> : null} // Show loader
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
               >
-                {loading ? 'Logging in...' : 'Login'}
+                {loading ? ' ' : 'Login'}
               </Button>
             </Form>
           )}

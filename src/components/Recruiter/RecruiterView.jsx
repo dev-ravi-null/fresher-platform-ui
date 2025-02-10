@@ -63,7 +63,7 @@ const RecruiterView = () => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap>
-                            Recruiter View
+                            Radiant Coder
                         </Typography>
                         <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
                             <Button variant="contained" onClick={dashboardNavigate}>

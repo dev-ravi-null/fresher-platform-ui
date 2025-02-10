@@ -40,7 +40,7 @@ FresherCard.propTypes = {
   fresher: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    commits: PropTypes.number.isRequired,
+    report: PropTypes.number.isRequired,
     interviews: PropTypes.number.isRequired,
     skills: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,

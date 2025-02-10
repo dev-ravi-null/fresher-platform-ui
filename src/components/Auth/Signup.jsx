@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, TextField, Container, Typography, Box, CircularProgress } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import Header from './Header';
-import { signupUser } from '../api/api';
+import Header from '../LandingPage/Header';
+import { signupUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -36,7 +36,7 @@ const Signup = () => {
   });
 
   const handleSubmit = async (values) => {
-    setLoading(true); // Start loading
+    setLoading(true); 
     try {
       await signupUser(values, navigate);
     } catch (error) {
@@ -149,7 +149,7 @@ const Signup = () => {
                 startIcon={loading ? <CircularProgress size={24} color="inherit" /> : null} // Show loader
                 sx={{ py: 1.5, fontSize: '1rem', textTransform: 'none' }}
               >
-                {loading ? 'Signing up...' : 'Signup'}
+                {loading ? ' ' : 'Signup'}
               </Button>
             </Form>
           )}
