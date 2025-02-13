@@ -21,9 +21,9 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [countdown, setCountdown] = React.useState(getTimeRemaining());
 
-  // Function to calculate time remaining from now to 10th Feb 2025
+  // Function to calculate time remaining from now to 28th Feb 2025
   function getTimeRemaining() {
-    const targetDate = new Date('2025-02-10T00:00:00'); // Target date: 10th Feb 2025 at midnight
+    const targetDate = new Date('2025-02-28T00:00:00'); // Target date: 10th Feb 2025 at midnight
     const currentDate = new Date();
     const timeDiff = targetDate - currentDate; // Difference in milliseconds
 
