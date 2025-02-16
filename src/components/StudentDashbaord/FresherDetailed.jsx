@@ -75,7 +75,7 @@ const FresherDetailed = () => {
             {/* Skills Section */}
             <Box sx={{ py: 5, backgroundColor: "#f8f9fa" }}>
                 <Container>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>Skills</Typography>
+                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Skills</Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1}>
                         {details.skills.map((skill, index) => (
                             <Chip key={index} label={skill} color="primary" size="small" />
@@ -86,7 +86,7 @@ const FresherDetailed = () => {
 
             {/* Interview Experiences */}
             <Container sx={{ py: 5 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>Interview Experiences</Typography>
+                <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px"}}>Interview Experiences</Typography>
                 <Carousel showThumbs={false} infiniteLoop autoPlay showStatus={false} emulateTouch interval={3000}>
                     {details.interviews?.length ? (
                         details.interviews.map((interview, index) => (
@@ -105,7 +105,7 @@ const FresherDetailed = () => {
             {/* Commits Section */}
             <Box sx={{ py: 5, backgroundColor: "#f8f9fa" }}>
                 <Container>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>Commits</Typography>
+                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Commits</Typography>
                     <Grid container spacing={4}>
                         {profileSummary.map((item) => (
                             <Grid item xs={12} sm={6} md={4} key={item.month}>
@@ -123,7 +123,7 @@ const FresherDetailed = () => {
 
             {/* Self Projects Section */}
             <Container sx={{ py: 5 }}>
-                <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>Self Projects</Typography>
+                <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Self Projects</Typography>
                 <Grid container spacing={4}>
                     {details.selfProject.map((project, index) => (
                         <Grid item xs={12} sm={6} md={4} key={project._id || index}>

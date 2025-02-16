@@ -5,21 +5,109 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import {
-    Sidebar,
-    Menu,
-    MenuItem,
-    SubMenu,
-    ProSidebarProvider,
-} from "react-pro-sidebar";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { Sidebar, Menu, MenuItem, SubMenu, ProSidebarProvider } from "react-pro-sidebar";
 import { useNavigate } from "react-router";
+import Tooltip from "@mui/material/Tooltip";
 
-const drawerWidth = 240;
+
+
+const drawerWidth = 220;
+
+const users = [
+    {
+        username: "ANUJ KUMAR",
+        avatar: "https://avatars.githubusercontent.com/u/1?v=4",
+        selfProject: 3,
+        totalCommits: 20,
+        totalInterviews: 2,
+        workingHours: 100,
+        education: "MCA",
+        performance: 0,
+        skills: "React.js, JavaScript, Node.js, MongoDB,Java",
+    },
+    {
+        username: "ANUJ KUMAR",
+        avatar: "https://avatars.githubusercontent.com/u/1?v=4",
+        selfProject: 3,
+        totalCommits: 20,
+        totalInterviews: 2,
+        workingHours: 100,
+        education: "MCA",
+        performance: 0,
+        skills: "React.js, JavaScript, Node.js, MongoDB,Java",
+    },
+    {
+        username: "RAVI SHARMA",
+        avatar: "https://avatars.githubusercontent.com/u/2?v=4",
+        selfProject: 5,
+        totalCommits: 15,
+        totalInterviews: 3,
+        workingHours: 220,
+        education: "B.tech",
+        performance: 0,
+        skills: "React.js, JavaScript, Node.js, MongoDB,Java ,React.js, JavaScript, Node.js, MongoDB",
+    },
+    {
+        username: "RAVI SHARMA",
+        avatar: "https://avatars.githubusercontent.com/u/2?v=4",
+        selfProject: 5,
+        totalCommits: 15,
+        totalInterviews: 3,
+        workingHours: 220,
+        education: "B.tech",
+        performance: 0,
+        skills: "React.js, JavaScript, Node.js, MongoDB,Java ,React.js, JavaScript, Node.js, MongoDB",
+    },
+    {
+        username: "NARAYAN SHARMA",
+        avatar: "https://avatars.githubusercontent.com/u/3?v=4",
+        selfProject: 2,
+        totalCommits: 25,
+        totalInterviews: 1,
+        workingHours: 90,
+        education: "MCA",
+        performance: 0,
+        skills: "React.js, JavaScript, Node.js",
+    },
+    {
+        username: "NARAYAN SHARMA",
+        avatar: "https://avatars.githubusercontent.com/u/3?v=4",
+        selfProject: 2,
+        totalCommits: 25,
+        totalInterviews: 1,
+        workingHours: 90,
+        education: "MCA",
+        performance: 0,
+        skills: "React.js, JavaScript, Node.js",
+    },
+    {
+        username: "MOHIT KUMAR",
+        avatar: "https://avatars.githubusercontent.com/u/4?v=4",
+        selfProject: 1,
+        totalCommits: 30,
+        totalInterviews: 0,
+        workingHours: 10,
+        education: "BA",
+        performance: 0,
+        skills: "React.js, JavaScript",
+    },
+    {
+        username: "MOHIT KUMAR",
+        avatar: "https://avatars.githubusercontent.com/u/4?v=4",
+        selfProject: 1,
+        totalCommits: 30,
+        totalInterviews: 0,
+        workingHours: 10,
+        education: "BA",
+        performance: 0,
+        skills: "React.js, JavaScript",
+    },
+];
 
 const RecruiterView = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,14 +120,9 @@ const RecruiterView = () => {
     const dashboardNavigate = () => {
         navigate('/dashboard');
     };
-
-    const sampleJobs = Array.from({ length: 12 }, (_, index) => ({
-        title: `Job Title ${index + 1}`,
-        company: `Company ${index + 1}`,
-        location: "Remote",
-        salary: `₹${5000 + index * 5000} PA`,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    }));
+    const fresherdetailsNavigate = () => {
+        navigate('/fresherdetails');
+    }
 
     return (
         <ProSidebarProvider>
@@ -54,27 +137,22 @@ const RecruiterView = () => {
                     }}
                 >
                     <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            sx={{ mr: 2 }}
-                        >
+                        <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap>
                             Radiant Coder
                         </Typography>
-                        <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
+                        {/* <Box sx={{ ml: "auto", display: 'flex', gap: 2 }}>
                             <Button variant="contained" onClick={dashboardNavigate}>
                                 Dashboard
                             </Button>
-                        </Box>
+                        </Box> */}
                     </Toolbar>
                 </AppBar>
 
                 {/* Sidebar */}
-                <Sidebar
+                {/* <Sidebar
                     style={{
                         width: drawerWidth,
                         position: "fixed",
@@ -106,42 +184,85 @@ const RecruiterView = () => {
                             </Box>
                         </MenuItem>
                     </Menu>
-                </Sidebar>
+                </Sidebar> */}
 
                 {/* Main Content */}
-                <Box
-                    component="main"
-                    sx={{
-                        flexGrow: 1,
-                        p: 3,
-                        width: { sm: `calc(100% - ${drawerWidth}px)` },
-                        mt: 8, // For AppBar height
-                    }}
-                >
-                    <Typography variant="h5" sx={{ mb: 2 }}>
-                        Job Listings
+                <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
+                    {/* Profile Cards */}
+                    <Typography variant="h5" sx={{ display: "inline-block",backgroundColor: "#7ba6b3",  padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                        Profiles
                     </Typography>
-                    <Grid container spacing={3}>
-                        {sampleJobs.map((job, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
-                                <Card
-                                    sx={{
-                                        height: "100%",
-                                        boxShadow: "0px 4px 10px rgba(0, 167, 239, 0.1)",
-                                    }}
-                                >
+                    <Grid container spacing={4} justifyContent="center">
+                        {users.map((user, index) => (
+                            <Grid item xs={12} sm={6} md={5} lg={3} key={index}>
+                                <Card sx={{ textAlign: "center", boxShadow: 7 }}>
+                                    <CardMedia
+                                        component="img"
+                                        height="10"
+                                        src={user.avatar}
+                                        alt={user.username}
+                                        sx={{ borderRadius: "50%", width: 100, height: 100, mx: "auto", mt: 2 }}
+                                    />
                                     <CardContent>
-                                        <Typography variant="h6">{job.title}</Typography>
-                                        <Typography color="textSecondary">{job.company}</Typography>
-                                        <Typography>{job.location}</Typography>
-                                        <Typography>{job.salary}</Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="textSecondary"
-                                            sx={{ mt: 1 }}
-                                        >
-                                            {job.description}
+                                        <Typography variant="h5" textAlign={"center"} sx={{ fontWeight: "bold" }} >{user.username}</Typography>
+                                        <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                Total Commits: {user.totalCommits}
+                                            </Box>
                                         </Typography>
+                                        <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                Total Interviews: {user.totalInterviews}
+                                            </Box>
+                                        </Typography>
+
+                                        <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                Education: {user.education}
+                                            </Box>
+                                        </Typography>
+                                        <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                Performance: {user.performance}
+                                            </Box>
+                                        </Typography>
+                                        <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                Self Project:   {user.selfProject}
+                                            </Box>
+                                        </Typography>
+                                        <Tooltip
+                                            title={user.skills} placement="top"
+                                            arrow componentsProps={{ tooltip: { sx: { backgroundColor: "#4caf50", color: "white", fontSize: "14px", padding: "8px", } }, }} >
+                                            <Typography variant="body2" fontWeight={"bold"} color="textSecondary" sx={{ cursor: "pointer" }}>
+                                                <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                    Skills :  ------
+                                                </Box>
+
+                                            </Typography>
+                                        </Tooltip>
+                                        <Button
+                                            variant="contained" sx={{
+                                                mt: 2, m: 0.9,  backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
+                                                "&:hover": {
+                                                    backgroundColor: "#654de4", 
+                                                    transform: "scale(1.05)",
+                                                },
+                                            }}
+                                            onClick={fresherdetailsNavigate}
+                                        >
+                                            See More
+                                        </Button>
+                                        <Button
+                                            variant="contained" sx={{
+                                                mt: 2, m: 0.9, backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
+                                                "&:hover": { backgroundColor: "#654de4", transform: "scale(1.05)", },
+                                            }}
+                                            onClick={dashboardNavigate}
+                                        >
+                                            View Resume
+                                        </Button>
+
                                     </CardContent>
                                 </Card>
                             </Grid>
