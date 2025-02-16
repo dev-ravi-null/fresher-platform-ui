@@ -112,7 +112,7 @@ const SkillsAndProjects = () => {
       }}
     >
       {/* ... (rest of your JSX -  the same as before) */}
-      <Typography variant="h5" component="h2" sx={{ textAlign: "center", mb: 4 }}>
+      <Typography variant="h5" component="h2" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold",  borderRadius: "4px" ,textAlign: "center", mb: 4 }}>
         Add Skills & Self Projects
       </Typography>
 
@@ -188,9 +188,9 @@ const SkillsAndProjects = () => {
       </Box>
 
       {/* Submit Button */}
-      <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading} >
+      <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading}  sx={{ fontSize: "1.1rem" }} >
       {loading ? (
-          <CircularProgress size={24} sx={{ color: "white" }} /> // Show spinner when loading
+          <CircularProgress sx={{ fontSize: "1.1rem", color: "white" }} /> // Show spinner when loading
         ) : (
           "Submit"
         )}

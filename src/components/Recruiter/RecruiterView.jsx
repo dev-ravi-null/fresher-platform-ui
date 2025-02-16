@@ -189,7 +189,7 @@ const RecruiterView = () => {
                 {/* Main Content */}
                 <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
                     {/* Profile Cards */}
-                    <Typography variant="h5" sx={{ display: "inline-block", backgroundColor: "#aab7b8", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                    <Typography variant="h5" sx={{ display: "inline-block",backgroundColor: "#7ba6b3",  padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
                         Profiles
                     </Typography>
                     <Grid container spacing={4} justifyContent="center">
@@ -243,7 +243,7 @@ const RecruiterView = () => {
                                         </Tooltip>
                                         <Button
                                             variant="contained" sx={{
-                                                mt: 2, m: 0.9, backgroundColor: "#7b61ff",
+                                                mt: 2, m: 0.9,  backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
                                                 "&:hover": {
                                                     backgroundColor: "#654de4", 
                                                     transform: "scale(1.05)",
@@ -255,7 +255,7 @@ const RecruiterView = () => {
                                         </Button>
                                         <Button
                                             variant="contained" sx={{
-                                                mt: 2, m: 0.9, backgroundColor: "#7b61ff",
+                                                mt: 2, m: 0.9, backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
                                                 "&:hover": { backgroundColor: "#654de4", transform: "scale(1.05)", },
                                             }}
                                             onClick={dashboardNavigate}
