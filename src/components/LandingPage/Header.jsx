@@ -23,7 +23,7 @@ function Header() {
 
   // Function to calculate time remaining from now to 10th Feb 2025
   function getTimeRemaining() {
-    const targetDate = new Date('2025-02-10T00:00:00'); // Target date: 10th Feb 2025 at midnight
+    const targetDate = new Date('2025-02-28T00:00:00');
     const currentDate = new Date();
     const timeDiff = targetDate - currentDate; // Difference in milliseconds
 
@@ -52,7 +52,7 @@ function Header() {
     const minutes = Math.floor((totalSeconds % 3600) / 60); // Calculate minutes
     const seconds = totalSeconds % 60; // Calculate seconds
 
-    return `${days}d ${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+    return `${days}d:${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
 
@@ -164,37 +164,8 @@ function Header() {
               </Link>
             ))}
           </Box>
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
-           {/* Countdown Timer */}
-           <Box sx={{ display: 'flex', alignItems: 'center', ml: 3 }}>
+          {/* Countdown Timer */}
+          <Box sx={{ display: 'flex', alignItems: 'center', ml: 3 }}>
             <Typography variant="h6" color="inherit">
               <b>Next Live : {formatTime(countdown)}</b>
             </Typography>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Button, TextField, Container, Typography, Box, CircularProgress } from '@mui/material';
+import { Button, TextField, Container, Typography, Box, CircularProgress,Select, MenuItem, FormHelperText, FormControl, InputLabel } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Header from '../LandingPage/Header';
 import { signupUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
+// import { Select, MenuItem, FormHelperText, FormControl, InputLabel } from '@mui/material';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Signup = () => {
   });
 
   const handleSubmit = async (values) => {
-    setLoading(true); 
+    setLoading(true);
     try {
       await signupUser(values, navigate);
     } catch (error) {
@@ -111,7 +112,7 @@ const Signup = () => {
                   error={touched.confirmPassword && Boolean(errors.confirmPassword)}
                   helperText={touched.confirmPassword && errors.confirmPassword}
                 />
-                <Field
+                {/* <Field
                   as={TextField}
                   name="role"
                   label="Role"
@@ -119,7 +120,19 @@ const Signup = () => {
                   margin="normal"
                   error={touched.role && Boolean(errors.role)}
                   helperText={touched.role && errors.role}
-                />
+                /> */}
+                <Field name="role">
+                  {({ field, meta }) => (
+                    <FormControl fullWidth margin="normal" error={meta.touched && Boolean(meta.error)}>
+                      <InputLabel>Role</InputLabel>
+                      <Select {...field} label="Role">
+                        <MenuItem value="Fresher">Fresher</MenuItem>
+                        <MenuItem value="Recruiter">Recruiter</MenuItem>
+                      </Select>
+                      {meta.touched && meta.error ? <FormHelperText>{meta.error}</FormHelperText> : null}
+                    </FormControl>
+                  )}
+                </Field>
                 <Field
                   as={TextField}
                   name="highestQualification"
