@@ -67,7 +67,7 @@ export const getUserDetail = async (userId, dispatch) => {
     dispatch(fetchDetailsStart()); // Set loading state
 
     const response = await api.get(`/fresher-details/${userId}`); // Use GET request
-    dispatch(fetchDetailsSuccess(response.data)); // Save data in Redux store
+    dispatch(fetchDetailsSuccess(response.data.data)); // Save data in Redux store
 
     return response.data; // Return data for further use
   } catch (error) {

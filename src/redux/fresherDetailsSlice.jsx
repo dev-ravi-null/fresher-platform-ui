@@ -15,7 +15,6 @@ const fresherDetailsSlice = createSlice({
 fetchDetailsSuccess: (state, action) => {
   state.loading = false;
   state.data = action.payload;
-  console.log("Redux Updated with Data:", state.data); // Debugging
 },
 
   fetchDetailsFailure: (state, action) => {

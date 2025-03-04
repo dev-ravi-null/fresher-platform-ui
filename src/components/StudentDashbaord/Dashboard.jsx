@@ -25,13 +25,10 @@ import AnalyticsIcon from '@mui/icons-material/Analytics';
 import { useSelector, useDispatch } from 'react-redux';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import axios from 'axios';
-import {
-    fetchDetailsStart,
-    fetchDetailsSuccess,
-    fetchDetailsFailure,
-} from '../../redux/fresherDetailsSlice';
+
 import DashboardCharts from './DashboardCharts';
 import { getUserDetail } from '../../api/api';
+
 
 const drawerWidth = 240;
 
