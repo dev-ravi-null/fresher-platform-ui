@@ -65,7 +65,7 @@ const CountdownTimer = ({ joiningDate }) => {
   return (
     <Box sx={{ textAlign: "center", p: 2, border: "2px solid #33f0ff", borderRadius: "8px", boxShadow: 2, minWidth: 180 }}>
       <Typography variant="h6" sx={{ fontWeight: "bold", }}>
-      Eligible for Interview
+        Eligible for Interview
       </Typography>
       <Typography variant="body1">
         {timeLeft.days}d : {timeLeft.hours}h : {timeLeft.minutes}m : {timeLeft.seconds}s
@@ -75,9 +75,9 @@ const CountdownTimer = ({ joiningDate }) => {
 };
 
 const DashboardSummary = () => {
-  const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
+  const fresherDetails = useSelector((state) => state.fresherDetails?.data?.fresherDetails);
   const profileSummary = fresherDetails?.profileSummary || [];
-  const createdAt = new Date(fresherDetails?.fresherDetails?.createdAt);
+  const createdAt = new Date(fresherDetails?.createdAt);
 
   const months = [];
   const date = new Date(createdAt);
@@ -93,7 +93,7 @@ const DashboardSummary = () => {
       {/* Centered Header & Right Aligned Countdown */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
         <Box sx={{ textAlign: "center", flexGrow: 1 }}>
-          <Typography variant="h5" sx={{ fontWeight: "bold", m:2, marginRight:1 }}>Monthly Progress</Typography>
+          <Typography variant="h5" sx={{ fontWeight: "bold", m: 2, marginRight: 1 }}>Monthly Progress</Typography>
           <Typography variant="subtitle1">
             Joining Date: <strong>{date.toISOString().split("T")[0]}</strong>
           </Typography>
