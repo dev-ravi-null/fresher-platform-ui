@@ -18,7 +18,7 @@ const DocumentUpload = ({ type }) => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const fresherDetails = useSelector((state) => state.fresherDetails?.data?.data);
+  const fresherDetails = useSelector((state) => state.fresherDetails?.data);
   const storedPhoto = fresherDetails?.fresherDetails.photo || null;
   let storedResume = fresherDetails?.fresherDetails.resume || null;
   storedResume = `${storedResume}.pdf`

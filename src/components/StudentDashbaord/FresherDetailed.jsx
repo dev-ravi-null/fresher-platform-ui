@@ -25,7 +25,7 @@ import CheckCircle from "@mui/icons-material/CheckCircle";
 
 const FresherDetailed = () => {
     const navigate = useNavigate();
-    const fresherDetails = useSelector((state) => state.fresherDetails.data.data);
+    const fresherDetails = useSelector((state) => state.fresherDetails.data);
     const auth = useSelector((state) => state.auth);
 
     if (!fresherDetails || !auth) {
@@ -86,7 +86,7 @@ const FresherDetailed = () => {
 
             {/* Interview Experiences */}
             <Container sx={{ py: 5 }}>
-                <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px"}}>Interview Experiences</Typography>
+                <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Interview Experiences</Typography>
                 <Carousel showThumbs={false} infiniteLoop autoPlay showStatus={false} emulateTouch interval={3000}>
                     {details.interviews?.length ? (
                         details.interviews.map((interview, index) => (

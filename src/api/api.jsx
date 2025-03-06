@@ -21,15 +21,17 @@ const handleLoginResponse = (response, navigate, dispatch) => {
     localStorage.setItem('userId', userId);
     localStorage.setItem('role', role);
     dispatch(setCredentials({ userId, token, role }));
-
-    if (role === 'fresher') {
-      getUserDetail(userId, dispatch);
-      navigate('/dashboard');
-    } else if (role === 'recruiter') {
-      navigate('/recruiter-view');
-    } else {
-      navigate('/');
-    }
+    setTimeout(() => {
+      if (role === 'fresher') {
+        getUserDetail(userId, dispatch);
+        navigate('/dashboard');
+      } else if (role === 'recruiter') {
+        navigate('/recruiter-view');
+      } else {
+        navigate('/');
+      }
+    }, 2000);
+    // dispatch(getUserDetail({ userId, dispatch }));
   } else {
     toast.error('Unexpected response!');
   }
@@ -67,8 +69,7 @@ export const getUserDetail = async (userId, dispatch) => {
     dispatch(fetchDetailsStart()); // Set loading state
 
     const response = await api.get(`/fresher-details/${userId}`); // Use GET request
-    dispatch(fetchDetailsSuccess(response.data)); // Save data in Redux store
-
+    dispatch(fetchDetailsSuccess(response.data.data)); // Save data in Redux store
     return response.data; // Return data for further use
   } catch (error) {
     dispatch(fetchDetailsFailure(error.response?.data?.message || "Failed to fetch details"));

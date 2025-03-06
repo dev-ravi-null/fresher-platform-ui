@@ -9,22 +9,25 @@ const fresherDetailsSlice = createSlice({
   },
   reducers: {
     fetchDetailsStart: (state) => {
-  state.loading = true;
-  state.error = null;
-},
-fetchDetailsSuccess: (state, action) => {
-  state.loading = false;
-  state.data = action.payload;
-  console.log("Redux Updated with Data:", state.data); // Debugging
-},
-
-  fetchDetailsFailure: (state, action) => {
-    state.loading = false;
-    state.error = action.payload;
-  },
+      state.loading = true;
+      state.error = null;
+    },
+    fetchDetailsSuccess: (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+    },
+    clearFresherDetail: (state, action) => {
+      state.data = true;
+      state.error = null;
+      state.loading = null;
+    },
+    fetchDetailsFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { fetchDetailsStart, fetchDetailsSuccess, fetchDetailsFailure } = fresherDetailsSlice.actions;
+export const { fetchDetailsStart, fetchDetailsSuccess, fetchDetailsFailure, clearFresherDetail } = fresherDetailsSlice.actions;
 
 export default fresherDetailsSlice.reducer;
