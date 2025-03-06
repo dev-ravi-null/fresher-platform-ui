@@ -24,9 +24,10 @@ import ConfirmDialog from './ConfirmDialog';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import { useSelector, useDispatch } from 'react-redux';
 import AssessmentIcon from '@mui/icons-material/Assessment';
-import axios from 'axios';
-
-import DashboardCharts from './DashboardCharts';
+import { clearCredentials } from '../../redux/authSlice';
+import { clearFresherDetail } from '../../redux/fresherDetailsSlice'
+// import axios from 'axios';
+// import DashboardCharts from './DashboardCharts';
 import { getUserDetail } from '../../api/api';
 
 
@@ -67,6 +68,8 @@ const Dashboard = ({ data }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
         localStorage.removeItem('role');
+        dispatch(clearCredentials());
+        dispatch(clearFresherDetail());
         setOpenDialog(false);
         navigate('/');
     };
