@@ -7,13 +7,13 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarEle
 
 const DashboardCharts = () => {
     const fresherDetails = useSelector((state) => state.fresherDetails.data.data)?.profileSummary || []; // Handle potential undefined data
-    const skillsDetails = useSelector((state) => state.fresherDetails.data.fresherDetails.skills)// Handle potential undefined data
-
+    const skillsDetails = useSelector((state) => state.fresherDetails.data).fresherDetails?.skills
+    console.log(useSelector((state) => state.fresherDetails.data))
     const totalCommit = 400;
     const totalInterview = 5;
     const totalSkills = 20;
 
-    const actualSkills = skillsDetails.length;
+    const actualSkills = skillsDetails?.length;
     let actualCommit = 0;
     let actualInterview = 0;
 
