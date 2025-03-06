@@ -25,10 +25,6 @@ const RecruiterView = () => {
     const studentDataRedux = useSelector((state) => state.fresherDetails.data);
     let totalCommits = 0
 
-    for (let index = 0; index < studentDataRedux.profileSummary.length; index++) {
-        totalCommits += studentDataRedux.profileSummary[index].commits
-    }
-
     const dashboardNavigate = () => {
         navigate('/dashboard');
     };
