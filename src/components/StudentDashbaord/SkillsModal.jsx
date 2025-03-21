@@ -188,7 +188,7 @@ const SkillsAndProjects = () => {
       </Box>
 
       {/* Submit Button */}
-      <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={loading} sx={{ fontSize: "1.1rem" }} >
+      <Button variant="contained"  color="primary" fullWidth onClick={handleSubmit} disabled={loading} sx={{ fontSize: "1.1rem" }} >
         {loading ? (
           <CircularProgress sx={{ fontSize: "1.1rem", color: "white" }} /> // Show spinner when loading
         ) : (
