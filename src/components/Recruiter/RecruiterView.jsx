@@ -98,8 +98,8 @@ const RecruiterView = () => {
                                             variant="contained" sx={{
                                                 mt: 2, m: 0.9, backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
                                                 "&:hover": {
-                                                    backgroundColor: "#654de4",
                                                     transform: "scale(1.05)",
+                                                    filter: "drop-shadow(0 0 .5em #166e86aa)"
                                                 },
                                             }}
                                             onClick={fresherdetailsNavigate}
@@ -109,7 +109,7 @@ const RecruiterView = () => {
                                         <Button
                                             variant="contained" sx={{
                                                 mt: 2, m: 0.9, backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
-                                                "&:hover": { backgroundColor: "#654de4", transform: "scale(1.05)", },
+                                                "&:hover": { transform: "scale(1.05)", filter: "drop-shadow(0 0 .5em #166e86aa)" },
                                             }}
                                             onClick={dashboardNavigate}
                                         >

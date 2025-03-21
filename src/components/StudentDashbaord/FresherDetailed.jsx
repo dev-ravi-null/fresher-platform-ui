@@ -62,7 +62,7 @@ const FresherDetailed = () => {
             <Container sx={{ py: 5 }}>
                 <Grid container spacing={4} alignItems="center">
                     <Grid item xs={12} md={4} display="flex" justifyContent="center">
-                        <Avatar src={details.photo} alt="Fresher" sx={{ width: 180, height: 180, boxShadow: 3 }} />
+                        <Avatar src={details.photo} alt="Fresher" sx={{ width: 180, height: 180, boxShadow: 3,":hover": { filter: "drop-shadow(0 0 2em #166e86aa)"},}} />
                     </Grid>
                     <Grid item xs={12} md={8}>
                         <Typography variant="h4" sx={{ fontWeight: "bold" }}>{fresherDetails.userSchema.name}</Typography>
@@ -103,15 +103,15 @@ const FresherDetailed = () => {
             </Container>
 
             {/* Commits Section */}
-            <Box sx={{ py: 5, backgroundColor: "#f8f9fa" }}>
+            <Box sx={{ py: 5, backgroundColor: "#f8f9fa"}}>
                 <Container>
                     <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Commits</Typography>
                     <Grid container spacing={4}>
                         {profileSummary.map((item) => (
                             <Grid item xs={12} sm={6} md={4} key={item.month}>
-                                <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
+                                <Card sx={{ borderRadius: 2, boxShadow: 3}}>
                                     <CardContent>
-                                        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#0d6efd", mb: 1 }}>{item.month}</Typography>
+                                        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#0d6efd", mb: 1,}}>{item.month}</Typography>
                                         <Typography variant="body1">Commits: {item.commits}</Typography>
                                     </CardContent>
                                 </Card>
