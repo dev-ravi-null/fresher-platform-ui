@@ -48,7 +48,7 @@ const RecruiterView = () => {
                 {/* Main Content */}
                 <Box component="main" sx={{ p: 4, mt: 6 }}>
                     {/* Profile Cards */}
-                    <Typography variant="h5" sx={{ display: "inline-block",backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))" , fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }} >
+                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }} >
                         Students Profiles
 
                     </Typography>
