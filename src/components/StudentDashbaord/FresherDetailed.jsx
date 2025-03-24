@@ -87,7 +87,7 @@ const FresherDetailed = () => {
             {/* Interview Experiences */}
             <Container sx={{ py: 5 }}>
                 <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Interview Experiences</Typography>
-                <Carousel showThumbs={false} infiniteLoop autoPlay showStatus={false} emulateTouch interval={3000}>
+                <Carousel showThumbs={false} infiniteLoop autoPlay  showStatus={false} emulateTouch interval={3000} >
                     {details.interviews?.length ? (
                         details.interviews.map((interview, index) => (
                             <Box key={interview._id || index} sx={{ p: 4, borderRadius: 2, backgroundColor: "#fff", boxShadow: 3 }}>
