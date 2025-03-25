@@ -93,7 +93,7 @@ const DashboardSummary = () => {
       {/* Centered Header & Right Aligned Countdown */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
         <Box sx={{ textAlign: "center", flexGrow: 1 }}>
-          <Typography variant="h5" sx={{ fontWeight: "bold", m: 2, marginRight: 1 }}>Monthly Progress</Typography>
+          <Typography variant="h5" sx={{ fontWeight: "bold", m: 2, marginRight: 1}}>Monthly Progress</Typography>
           <Typography variant="subtitle1">
             Joining Date: <strong>{date.toISOString().split("T")[0]}</strong>
           </Typography>

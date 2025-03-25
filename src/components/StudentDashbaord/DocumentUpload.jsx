@@ -71,7 +71,7 @@ const DocumentUpload = ({ type }) => {
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom  sx={{backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))", textAlign: "center",borderRadius: "10px",}}>
         {type} Upload
       </Typography>
 
