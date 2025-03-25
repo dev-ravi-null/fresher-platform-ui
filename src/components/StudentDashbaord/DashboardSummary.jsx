@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
+import { X } from "@mui/icons-material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -89,7 +90,8 @@ const DashboardSummary = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", overflowX: "auto", p: 2 }}>
+    
+    <Box sx={{ width: "100%", overflowX: "auto", p: 2 }} >
       {/* Centered Header & Right Aligned Countdown */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
         <Box sx={{ textAlign: "center", flexGrow: 1 }}>

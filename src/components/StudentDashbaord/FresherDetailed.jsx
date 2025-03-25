@@ -74,7 +74,7 @@ const FresherDetailed = () => {
 
             {/* Skills Section */}
             <Box sx={{ py: 5, backgroundColor: "#f8f9fa" }}>
-                <Container>
+                <Container sx={{ ":hover": { filter: "drop-shadow(0 0 2em #166e86aa)"},}}>
                     <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Skills</Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1}>
                         {details.skills.map((skill, index) => (
@@ -85,7 +85,7 @@ const FresherDetailed = () => {
             </Box>
 
             {/* Interview Experiences */}
-            <Container sx={{ py: 5 }}>
+            <Container sx={{ py: 5, ":hover": { filter: "drop-shadow(0 0 2em #166e86aa)"}, }}>
                 <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Interview Experiences</Typography>
                 <Carousel showThumbs={false} infiniteLoop autoPlay  showStatus={false} emulateTouch interval={3000} >
                     {details.interviews?.length ? (
@@ -103,14 +103,14 @@ const FresherDetailed = () => {
             </Container>
 
             {/* Commits Section */}
-            <Box sx={{ py: 5, backgroundColor: "#f8f9fa"}}>
-                <Container>
-                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Commits</Typography>
+            <Box sx={{ py: 5, backgroundColor: "#f8f9fa", }}>
+                <Container >
+                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" , }}>Commits</Typography>
                     <Grid container spacing={4}>
                         {profileSummary.map((item) => (
                             <Grid item xs={12} sm={6} md={4} key={item.month}>
-                                <Card sx={{ borderRadius: 2, boxShadow: 3}}>
-                                    <CardContent>
+                                <Card sx={{ borderRadius: 2, boxShadow: 3,":hover": { filter: "drop-shadow(0 0 2em #166e86aa)"},}}>
+                                    <CardContent >
                                         <Typography variant="h6" sx={{ fontWeight: "bold", color: "#0d6efd", mb: 1,}}>{item.month}</Typography>
                                         <Typography variant="body1">Commits: {item.commits}</Typography>
                                     </CardContent>
@@ -127,7 +127,7 @@ const FresherDetailed = () => {
                 <Grid container spacing={4}>
                     {details.selfProject.map((project, index) => (
                         <Grid item xs={12} sm={6} md={4} key={project._id || index}>
-                            <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
+                            <Card sx={{ borderRadius: 2, boxShadow: 3 , ":hover": { filter: "drop-shadow(0 0 2em #166e86aa)"},}}>
                                 <CardContent>
                                     <Typography variant="h6" sx={{ fontWeight: "bold", color: "#0d6efd" }}>{project.title || `Project ${index + 1}`}</Typography>
                                     <List dense>

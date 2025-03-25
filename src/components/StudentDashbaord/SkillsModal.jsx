@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 const skillsList = [
   "JavaScript",
   "React",
-  "React",
+  "React Native",
   "Vue",
   "Next",
   "Node.js",
