@@ -21,6 +21,7 @@ const DocumentUpload = ({ type }) => {
   const fresherDetails = useSelector((state) => state.fresherDetails?.data);
   const storedPhoto = fresherDetails?.fresherDetails.photo || null;
   let storedResume = fresherDetails?.fresherDetails.resume || null;
+  
   storedResume = `${storedResume}.pdf`
   const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {

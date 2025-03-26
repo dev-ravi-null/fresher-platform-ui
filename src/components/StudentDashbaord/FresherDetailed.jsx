@@ -1,4 +1,5 @@
 import React from "react";
+import './Style.css';
 import {
     Box,
     Typography,
@@ -62,7 +63,7 @@ const FresherDetailed = () => {
             <Container sx={{ py: 5 }}>
                 <Grid container spacing={4} alignItems="center">
                     <Grid item xs={12} md={4} display="flex" justifyContent="center">
-                        <Avatar src={details.photo} alt="Fresher" sx={{ width: 180, height: 180, boxShadow: 3,":hover": { filter: "drop-shadow(0 0 2em #166e86aa)"},}} />
+                        <Avatar className="skills" src={details.photo} alt="Fresher" sx={{ width: 180, height: 180, boxShadow: 3,}} />
                     </Grid>
                     <Grid item xs={12} md={8}>
                         <Typography variant="h4" sx={{ fontWeight: "bold" }}>{fresherDetails.userSchema.name}</Typography>
@@ -74,7 +75,7 @@ const FresherDetailed = () => {
 
             {/* Skills Section */}
             <Box sx={{ py: 5, backgroundColor: "#f8f9fa" }}>
-                <Container>
+                <Container className="skills" >
                     <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Skills</Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1}>
                         {details.skills.map((skill, index) => (
@@ -85,7 +86,7 @@ const FresherDetailed = () => {
             </Box>
 
             {/* Interview Experiences */}
-            <Container sx={{ py: 5 }}>
+            <Container className="skills" sx={{ py: 5}}>
                 <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Interview Experiences</Typography>
                 <Carousel showThumbs={false} infiniteLoop autoPlay  showStatus={false} emulateTouch interval={3000} >
                     {details.interviews?.length ? (
@@ -103,14 +104,14 @@ const FresherDetailed = () => {
             </Container>
 
             {/* Commits Section */}
-            <Box sx={{ py: 5, backgroundColor: "#f8f9fa"}}>
-                <Container>
-                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Commits</Typography>
+            <Box sx={{ py: 5, backgroundColor: "#f8f9fa", }}>
+                <Container >
+                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" , }}>Commits</Typography>
                     <Grid container spacing={4}>
                         {profileSummary.map((item) => (
                             <Grid item xs={12} sm={6} md={4} key={item.month}>
-                                <Card sx={{ borderRadius: 2, boxShadow: 3}}>
-                                    <CardContent>
+                                <Card className="skills" sx={{ borderRadius: 2, boxShadow: 3,}}>
+                                    <CardContent >
                                         <Typography variant="h6" sx={{ fontWeight: "bold", color: "#0d6efd", mb: 1,}}>{item.month}</Typography>
                                         <Typography variant="body1">Commits: {item.commits}</Typography>
                                     </CardContent>
@@ -127,7 +128,7 @@ const FresherDetailed = () => {
                 <Grid container spacing={4}>
                     {details.selfProject.map((project, index) => (
                         <Grid item xs={12} sm={6} md={4} key={project._id || index}>
-                            <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
+                            <Card className="skills" sx={{ borderRadius: 2, boxShadow: 3 }}>
                                 <CardContent>
                                     <Typography variant="h6" sx={{ fontWeight: "bold", color: "#0d6efd" }}>{project.title || `Project ${index + 1}`}</Typography>
                                     <List dense>
