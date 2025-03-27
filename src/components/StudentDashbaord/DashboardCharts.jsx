@@ -72,15 +72,15 @@ const DashboardCharts = () => {
             <h6 style={{ color: 'grey' }}>NOTE : 50 Commits and 1 interview should be complete in first month for listing your profile.</h6>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', padding: '20px' }}>
                 <div>
-                    <h3>Commits Progress</h3>
+                    <h2>Commits Progress</h2>
                     <Doughnut data={commitsData} />
                 </div>
                 <div>
-                    <h3>Interview Preparation</h3>
+                    <h2>Interview Preparation</h2>
                     <Doughnut data={interviewData} />
                 </div>
                 <div>
-                    <h3>Skills Acquired</h3>
+                    <h2>Skills Acquired</h2>
                     <Bar data={skillsData} options={chartOptions} />
                 </div>
             </div>

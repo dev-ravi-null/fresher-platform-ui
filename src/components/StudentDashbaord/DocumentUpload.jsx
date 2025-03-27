@@ -21,6 +21,7 @@ const DocumentUpload = ({ type }) => {
   const fresherDetails = useSelector((state) => state.fresherDetails?.data);
   const storedPhoto = fresherDetails?.fresherDetails.photo || null;
   let storedResume = fresherDetails?.fresherDetails.resume || null;
+  
   storedResume = `${storedResume}.pdf`
   const upload = async () => {
     if (!selectedFiles || selectedFiles.length === 0) {
@@ -71,7 +72,7 @@ const DocumentUpload = ({ type }) => {
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom  sx={{backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))", textAlign: "center",borderRadius: "10px",}}>
         {type} Upload
       </Typography>
 

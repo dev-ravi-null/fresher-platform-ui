@@ -48,7 +48,7 @@ const RecruiterView = () => {
                 {/* Main Content */}
                 <Box component="main" sx={{ p: 4, mt: 6 }}>
                     {/* Profile Cards */}
-                    <Typography variant="h5" sx={{ display: "inline-block", backgroundColor: "#7ba6b3", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                    <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }} >
                         Students Profiles
 
                     </Typography>
@@ -61,26 +61,26 @@ const RecruiterView = () => {
                                         height="10"
                                         src={studentDataRedux.fresherDetails.photo}
                                         alt={user.username}
-                                        sx={{ borderRadius: "50%", width: 100, height: 100, mx: "auto", mt: 2 }}
+                                        sx={{ borderRadius: "50%", width: 120, height: 120, mx: "auto", mt: 2 }}
                                     />
                                     <CardContent>
                                         <Typography variant="h5" textAlign={"center"} sx={{ fontWeight: "bold" }} >{user.username}</Typography>
                                         <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
-                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px", px: .5 ,py: .5 ,mr: 1,}}>
                                                 Total Commits: {totalCommits}
                                             </Box>
-                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px", px: .5,py: .5,mr: 1, }}>
                                                 Total Interviews: {user.totalInterviews}
                                             </Box>
-                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px",px: .5,py: .5,mr: 1, }}>
                                                 Education: {user.education}
                                             </Box>
                                         </Typography>
                                         <Typography variant="body2" fontWeight={"bold"} color="textSecondary">
-                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px",px: .5,py: .5,mr: 1, }}>
                                                 Performance: {user.performance}
                                             </Box>
-                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                            <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px",px: .5,py: .5,mr: 1,}}>
                                                 Self Project:   {user.selfProject}
                                             </Box>
                                         </Typography>
@@ -88,7 +88,7 @@ const RecruiterView = () => {
                                             title={user.skills} placement="top"
                                             arrow componentsProps={{ tooltip: { sx: { backgroundColor: "#4caf50", color: "white", fontSize: "14px", padding: "8px", } }, }} >
                                             <Typography variant="body2" fontWeight={"bold"} color="textSecondary" sx={{ cursor: "pointer" }}>
-                                                <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>
+                                                <Box sx={{ display: "inline-block", backgroundColor: "#d9d9d9", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px", px: .5,py: .5,mr: 1,}}>
                                                     Skills :  ------
                                                 </Box>
 
@@ -98,8 +98,8 @@ const RecruiterView = () => {
                                             variant="contained" sx={{
                                                 mt: 2, m: 0.9, backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
                                                 "&:hover": {
-                                                    backgroundColor: "#654de4",
                                                     transform: "scale(1.05)",
+                                                    filter: "drop-shadow(0 0 .5em #166e86aa)"
                                                 },
                                             }}
                                             onClick={fresherdetailsNavigate}
@@ -109,7 +109,7 @@ const RecruiterView = () => {
                                         <Button
                                             variant="contained" sx={{
                                                 mt: 2, m: 0.9, backgroundImage: "linear-gradient(to right,rgb(64, 155, 235),rgb(63, 224, 233))",
-                                                "&:hover": { backgroundColor: "#654de4", transform: "scale(1.05)", },
+                                                "&:hover": { transform: "scale(1.05)", filter: "drop-shadow(0 0 .5em #166e86aa)" },
                                             }}
                                             onClick={dashboardNavigate}
                                         >

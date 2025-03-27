@@ -14,11 +14,16 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 const skillsList = [
   "JavaScript",
   "React",
+  "React",
+  "Vue",
+  "Next",
   "Node.js",
   "Python",
   "Java",
+  "SpringBoot",
   "C++",
   "SQL",
+  "MongoDB",
   "HTML",
   "CSS",
   "TypeScript",
@@ -27,6 +32,7 @@ const skillsList = [
   "Kubernetes",
   "Git",
   "GraphQL",
+  
 ];
 
 const SkillsAndProjects = () => {
