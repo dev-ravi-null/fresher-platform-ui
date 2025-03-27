@@ -101,7 +101,8 @@ const Dashboard = ({ data }) => {
                         key={key}
                         onClick={() => handleSelect(key)}
                         selected={selected === key}
-                        sx={{ cursor: 'pointer' }}
+                        sx={{ cursor: 'pointer' ,
+                        backgroundColor: selected === key ? 'grey.300' : 'transparent'}}
                     >
                         <ListItemIcon>{drawerIcons[key.toLowerCase()]}</ListItemIcon>
                         <ListItemText primary={key.replace(/([A-Z])/g, ' $1')} />
