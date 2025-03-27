@@ -75,7 +75,7 @@ const FresherDetailed = () => {
 
             {/* Skills Section */}
             <Box sx={{ py: 5, backgroundColor: "#f8f9fa" }}>
-                <Container className="skills" >
+                <Container  >
                     <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Skills</Typography>
                     <Stack direction="row" flexWrap="wrap" gap={1}>
                         {details.skills.map((skill, index) => (
@@ -86,7 +86,7 @@ const FresherDetailed = () => {
             </Box>
 
             {/* Interview Experiences */}
-            <Container className="skills" sx={{ py: 5}}>
+            <Container  sx={{ py: 5}}>
                 <Typography variant="h5" sx={{ display: "inline-block", backgroundImage: "linear-gradient(to right, #4facfe, #00f2fe)", padding: "2px 5px", fontWeight: "bold", mb: 1, mt: 1, borderRadius: "4px" }}>Interview Experiences</Typography>
                 <Carousel showThumbs={false} infiniteLoop autoPlay  showStatus={false} emulateTouch interval={3000} >
                     {details.interviews?.length ? (

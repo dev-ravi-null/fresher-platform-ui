@@ -1,3 +1,18 @@
 .skills:hover {
     box-shadow: 10px 10px 20px rgba(61, 61, 131, .648);
 }
+
+.Table{
+    margin: 20px auto;
+    padding: 5px;
+    max-width: 100%;
+    overflow-x:auto;
+    overflow-y: auto;
+    white-space: nowrap;
+    border: 1px solid #ddd;
+}
+
+
+
+
+

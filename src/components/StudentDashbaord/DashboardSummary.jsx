@@ -89,7 +89,7 @@ const DashboardSummary = () => {
   }
 
   return (
-    <Box sx={{ width: "100%", overflowX: "auto", p: 2 }}>
+    <Box  sx={{ width: "100%", overflowX: "auto", p: 2 }}>
       {/* Centered Header & Right Aligned Countdown */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
         <Box sx={{ textAlign: "center", flexGrow: 1 }}>
@@ -100,7 +100,6 @@ const DashboardSummary = () => {
         </Box>
         <CountdownTimer joiningDate={date.toISOString().split("T")[0]} />
       </Box>
-
       <TableContainer component={Paper} sx={{ width: "100%", overflowX: "auto" }}>
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
@@ -145,6 +144,7 @@ const DashboardSummary = () => {
         </Table>
       </TableContainer>
     </Box>
+    
   );
 };
 

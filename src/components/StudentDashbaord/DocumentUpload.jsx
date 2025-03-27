@@ -148,3 +148,4 @@ const DocumentUpload = ({ type }) => {
 };
 
 export default DocumentUpload;
+

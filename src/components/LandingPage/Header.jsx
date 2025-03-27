@@ -164,12 +164,6 @@ function Header() {
               </Link>
             ))}
           </Box>
-          {/* Countdown Timer */}
-          <Box sx={{ display: 'flex', alignItems: 'center', ml: 3 }}>
-            <Typography variant="h6" color="inherit">
-              <b>Next Live : {formatTime(countdown)}</b>
-            </Typography>
-          </Box>
         </Toolbar>
       </Container>
     </AppBar>

@@ -90,7 +90,7 @@ const Dashboard = ({ data }) => {
         skills: <ComputerIcon sx={{ color: 'green' }} />,
         logout: <LogoutIcon sx={{ color: 'red' }} />,
     };
-
+    
     const drawer = (
         <div>
             <Toolbar />
@@ -101,7 +101,9 @@ const Dashboard = ({ data }) => {
                         key={key}
                         onClick={() => handleSelect(key)}
                         selected={selected === key}
-                        sx={{ cursor: 'pointer' }}
+                        sx={{
+                            cursor: 'pointer',
+                            backgroundColor: selected === key ? 'grey.300' : 'transparent'}}
                     >
                         <ListItemIcon>{drawerIcons[key.toLowerCase()]}</ListItemIcon>
                         <ListItemText primary={key.replace(/([A-Z])/g, ' $1')} />
@@ -110,7 +112,7 @@ const Dashboard = ({ data }) => {
             </List>
         </div>
     );
-
+    
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
